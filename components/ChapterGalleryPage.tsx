@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 
-const LOCAL_API  = "http://localhost:4002/api";
 const PROD_API   = "https://api.gripforum.com/api";
-const LOCAL_IMG  = "http://localhost:4002/api/public";
 const PROD_IMG   = "https://api.gripforum.com/api/public";
 
 function toTitle(slug: string) {
@@ -143,7 +141,6 @@ export default function ChapterGalleryPage({
         ).catch(() => null);
 
         let cid: string | null = null;
-        let usedLocal = false;
 
         if (apiRes?.ok) {
           const apiJson = await apiRes.json();
@@ -152,7 +149,7 @@ export default function ChapterGalleryPage({
         }
 
         // 2. Resolve chapterId via chapter list
-        for (const base of [LOCAL_API, PROD_API]) {
+        for (const base of [PROD_API]) {
           try {
             const r = await fetch(
               `${base}/mobile/chapters/list?search=${encodeURIComponent(chapterSlug)}&limit=50`,
@@ -170,7 +167,6 @@ export default function ChapterGalleryPage({
               ) || (j.data || []).find((c: any) => slugify(c.chapterName) === chapterSlug);
             if (matched) {
               cid = matched._id;
-              usedLocal = base === LOCAL_API;
               if (!chapterName) setChapterName(matched.chapterName || "");
               break;
             }
@@ -180,10 +176,10 @@ export default function ChapterGalleryPage({
         if (!cid) { setLoading(false); return; }
 
         setChapterId(cid);
-        setImgBase(usedLocal ? LOCAL_IMG : PROD_IMG);
+        setImgBase(PROD_IMG);
 
         // 3. Load gallery
-        for (const base of usedLocal ? [LOCAL_API, PROD_API] : [PROD_API, LOCAL_API]) {
+        for (const base of [PROD_API]) {
           try {
             const r = await fetch(`${base}/public/gallery/chapters/${cid}`, { cache: "no-store" });
             if (!r.ok) continue;

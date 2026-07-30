@@ -26,10 +26,9 @@ export default function ZoneHomePage({ params }: Props) {
       const formattedTitle = formatZoneTitle(zoneSlug);
       setZoneName(formattedTitle);
 
-      const LOCAL_API = "http://localhost:4002/api";
       const PROD_API  = "https://api.gripforum.com/api";
 
-      for (const base of [LOCAL_API, PROD_API]) {
+      for (const base of [PROD_API]) {
         try {
           const res = await fetch(`${base}/mobile/zones/list/public?search=${encodeURIComponent(formattedTitle)}`, {
             cache: "no-store",

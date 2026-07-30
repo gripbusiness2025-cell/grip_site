@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 
-const LOCAL_API  = "http://localhost:4002/api";
 const PROD_API   = "https://api.gripforum.com/api";
 
 function toTitle(slug: string) {
@@ -76,7 +75,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
   useEffect(() => {
     async function load() {
       setLoading(true);
-      for (const base of [LOCAL_API, PROD_API]) {
+      for (const base of [PROD_API]) {
         try {
           const r = await fetch(`${base}/mobile/chapters/list?limit=50`, { cache: "no-store" });
           if (!r.ok) continue;
@@ -145,7 +144,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
       <section className="zone-chapters-section">
         <div className="container">
           <div className="zone-header">
-            <h2>Active Chapters</h2>
+            <h2>Chapters</h2>
             <p className="text-muted">Select a chapter below to explore leadership and associates.</p>
           </div>
 

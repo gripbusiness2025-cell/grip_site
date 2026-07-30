@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const IS_DEV = process.env.NODE_ENV === "development";
-const LOCAL  = "http://localhost:4002/api";
 const PROD   = "https://api.gripforum.com/api";
 const IMAGE_URL = "https://api.gripforum.com/api/public";
 
@@ -19,10 +17,7 @@ async function tryFetch(paths: string[]): Promise<Response | null> {
 }
 
 function backends(...path: string[]) {
-  const urls = path.flatMap((p) =>
-    IS_DEV ? [`${LOCAL}${p}`, `${PROD}${p}`] : [`${PROD}${p}`]
-  );
-  return urls;
+  return path.map((p) => `${PROD}${p}`);
 }
 
 function slugify(s: string) {
@@ -80,14 +75,12 @@ export async function GET(req: NextRequest) {
 
     let bgImage: { docPath: string; docName: string } | null = null;
     let memberLinks: { memberId: string; profileLink: string }[] = [];
-    let usedLocal = false;
 
     try {
       const pubRes = await tryFetch(
         backends(`/public/chapters/by-slug?chapter=${encodeURIComponent(chapterSlug)}&zone=${encodeURIComponent(zoneSlug)}`)
       );
       if (pubRes) {
-        usedLocal = IS_DEV && (pubRes.url?.startsWith(LOCAL) ?? false);
         const pubJson = await pubRes.json();
         if (pubJson.success) {
           headTableRoles = pubJson.headTable  || [];
@@ -159,9 +152,8 @@ export async function GET(req: NextRequest) {
     }
 
     // ── 5. Chapter info ────────────────────────────────────────────────────
-    const baseImageUrl = usedLocal ? "http://localhost:4002/api/public" : IMAGE_URL;
     const bgImageUrl = bgImage?.docPath && bgImage?.docName
-      ? `${baseImageUrl}/${bgImage.docPath}/${bgImage.docName}`
+      ? `${IMAGE_URL}/${bgImage.docPath}/${bgImage.docName}`
       : null;
 
     const chapterInfo = {

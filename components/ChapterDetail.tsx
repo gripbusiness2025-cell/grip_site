@@ -209,15 +209,47 @@ export default function ChapterDetail({
 
   // ── group members by role ──────────────────────
   const HEAD_ROLES = ["president", "vice president", "secretary", "treasurer"];
-  const ASSOC_COM_ROLES = ["membership", "visitor host", "visitor interaction"];
+  const ASSOC_COM_ROLES = [
+    "associate committee",
+    "membership",
+    "visitor host",
+  ];
   const COORD_ROLES = ["coordinator", "mentor", "training"];
+  const VISITOR_TEAM_ROLES = ["visitor interaction team", "visitor interaction"];
 
   const roleOf = (m: Member) => (m.chapterRole || m.role || "").toLowerCase();
 
-  const headTeam    = members.filter((m) => HEAD_ROLES.some((r) => roleOf(m).includes(r)));
-  const assocCom    = members.filter((m) => !HEAD_ROLES.some((r) => roleOf(m).includes(r)) && ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)));
-  const coordTeam   = members.filter((m) => !HEAD_ROLES.some((r) => roleOf(m).includes(r)) && !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) && COORD_ROLES.some((r) => roleOf(m).includes(r)));
-  const assignedIds = new Set([...headTeam, ...assocCom, ...coordTeam].map((m) => m._id));
+  const headTeam    = members
+    .filter((m) => HEAD_ROLES.some((r) => roleOf(m).includes(r)))
+    .sort((a, b) => {
+      const order = (m: Member) => {
+        const r = roleOf(m);
+        if (r.includes("president") && !r.includes("vice")) return 1;
+        if (r.includes("vice")) return 2;
+        if (r.includes("secretary")) return 3;
+        if (r.includes("treasurer")) return 4;
+        return 5;
+      };
+      return order(a) - order(b);
+    });
+  const assocCom    = members.filter((m) =>
+    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
+    ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r))
+  );
+  const coordTeam   = members.filter((m) =>
+    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
+    !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) &&
+    COORD_ROLES.some((r) => roleOf(m).includes(r))
+  );
+  const visitorTeam = members.filter((m) =>
+    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
+    !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) &&
+    !COORD_ROLES.some((r) => roleOf(m).includes(r)) &&
+    VISITOR_TEAM_ROLES.some((r) => roleOf(m).includes(r))
+  );
+  const assignedIds = new Set(
+    [...headTeam, ...assocCom, ...coordTeam, ...visitorTeam].map((m) => m._id)
+  );
   const associates  = members.filter((m) => !assignedIds.has(m._id));
 
   // totalCount used for role grouping sections
@@ -294,10 +326,10 @@ export default function ChapterDetail({
 
 
       {/* ── Chapter Leadership (President / VP / Secretary / etc.) ── */}
-      {!loading && headTeam.length + assocCom.length + coordTeam.length > 0 && (
+      {!loading && headTeam.length + assocCom.length + coordTeam.length + visitorTeam.length > 0 && (
         <section className="chapter-leadership-section" id="leadership">
           <div className="container">
-            <div className="chapter-leadership-header"><h3>Chapter Leadership</h3></div>
+            <div className="chapter-leadership-header"><h3>Head Team</h3></div>
             {/* All leadership roles in ONE row */}
             {headTeam.length > 0 && (
               <div className="chapter-role-section">
@@ -307,7 +339,8 @@ export default function ChapterDetail({
               </div>
             )}
             <RoleGroup title="Associate Committee" members={assocCom} memberLinks={memberLinks} />
-            <RoleGroup title="Coordinator Team"    members={coordTeam} memberLinks={memberLinks} />
+            <RoleGroup title="Coordinator Team" members={coordTeam} memberLinks={memberLinks} />
+            <RoleGroup title="Visitor Interaction Team" members={visitorTeam} memberLinks={memberLinks} />
           </div>
         </section>
       )}

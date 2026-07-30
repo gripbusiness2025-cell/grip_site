@@ -5,9 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-const LOCAL_API  = "http://localhost:4002/api";
 const PROD_API   = "https://api.gripforum.com/api";
-const BACKEND_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://gripforum.com";
+const BACKEND_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://api.gripforum.com";
 
 const slugify = (s: string) =>
   (s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -29,7 +28,7 @@ export default function ZoneContactPage({ params }: Props) {
   useEffect(() => {
     async function fetchED() {
       setLoading(true);
-      for (const base of [LOCAL_API, PROD_API]) {
+      for (const base of [PROD_API]) {
         try {
           const res = await fetch(`${base}/admin/zones/list/public`, { cache: "no-store" });
           if (!res.ok) continue;

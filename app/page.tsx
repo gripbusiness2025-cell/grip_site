@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import UnderlineSvg from "@/components/UnderlineSvg";
+import { fetchWebsiteEvents } from "@/lib/websiteEvents";
 
 export const metadata: Metadata = {
   title: "GRIP – Global Referral Interacting Platform for Professional Networking",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
     "GRIP is a global referral-based networking platform fostering ethical collaboration, structured business growth, and meaningful professional connections.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const events = await fetchWebsiteEvents();
+
   return (
     <>
       <Preloader />
@@ -416,53 +419,32 @@ export default function Home() {
             </div>
           </div>
           <div className="row">
-            <div
-              className="col-lg-6 col-md-6 wow fadeInUp animated"
-              data-wow-delay=".2s"
-            >
-              <div className="si__our__blog__box">
-                <div className="si__our__blog__thumb">
-                  <div className="si__our__blog__thumb__inner">
-                    <img src="/assets/images/grip/blog2.png" alt="" />
+            {events.map((event, idx) => (
+              <div
+                key={event._id}
+                className="col-lg-6 col-md-6 wow fadeInUp animated"
+                data-wow-delay={`${0.2 + idx * 0.1}s`}
+              >
+                <div className="si__our__blog__box">
+                  <div className="si__our__blog__thumb">
+                    <div className="si__our__blog__thumb__inner">
+                      <img
+                        src={event.imageUrl || "/assets/images/grip/blog2.png"}
+                        alt={event.title}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="si__our__blog__inner">
-                  <div className="si__our__blog__content">
-                    <a className="si__our__blog__content__text" href="#">
-                      GRIP NEXOR - Launch
-                    </a>
-                    <p>
-                      An exclusive chapter for young entrepreneurs aged between 18 to
-                      22 years
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="col-lg-6 col-md-6 wow fadeInUp animated"
-              data-wow-delay=".3s"
-            >
-              <div className="si__our__blog__box">
-                <div className="si__our__blog__thumb">
-                  <div className="si__our__blog__thumb__inner">
-                    <img src="/assets/images/grip/launch.jpg" alt="" />
-                  </div>
-                </div>
-                <div className="si__our__blog__inner">
-                  <div className="si__our__blog__content">
-                    <a className="si__our__blog__content__text" href="#">
-                      GRIP Virutcham - Launch
-                    </a>
-                    <p>
-                      A platform to nurture business growth through strong referral
-                      roots.
-                    </p>
+                  <div className="si__our__blog__inner">
+                    <div className="si__our__blog__content">
+                      <a className="si__our__blog__content__text" href="/upcoming-events">
+                        {event.title}
+                      </a>
+                      <p>{event.description}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import UnderlineSvg from "@/components/UnderlineSvg";
 
-const LOCAL_API = "http://localhost:4002/api";
 const PROD_API  = "https://api.gripforum.com/api";
 const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "https://api.gripforum.com/api/public";
 
@@ -51,7 +50,7 @@ export default function ZoneEventsPage({ params }: Props) {
   useEffect(() => {
     async function fetchEvents() {
       setLoading(true);
-      for (const base of [LOCAL_API, PROD_API]) {
+      for (const base of [PROD_API]) {
         try {
           const res = await fetch(`${base}/public/chapters/events?zone=${zoneSlug}`, {
             cache: "no-store",

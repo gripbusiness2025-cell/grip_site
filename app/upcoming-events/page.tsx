@@ -3,28 +3,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import UnderlineSvg from "@/components/UnderlineSvg";
+import { fetchWebsiteEvents } from "@/lib/websiteEvents";
 
 export const metadata: Metadata = {
   title: "Upcoming Events – GRIP India's 1st Digital Business Networking Forum",
   description: "Stay updated with the latest upcoming events at GRIP.",
 };
 
-const events = [
-  {
-    img: "/assets/images/grip/blog2.png",
-    title: "GRIP NEXOR - Launch",
-    desc: "An exclusive chapter for young entrepreneurs aged between 18 to 22 years",
-    delay: ".7s",
-  },
-  {
-    img: "/assets/images/grip/launch.jpg",
-    title: "GRIP Virutcham - Launch",
-    desc: "A platform to nurture business growth through strong referral roots.",
-    delay: ".9s",
-  },
-];
+export default async function UpcomingEvents() {
+  const events = await fetchWebsiteEvents();
 
-export default function UpcomingEvents() {
   return (
     <>
       <Header />
@@ -50,29 +38,38 @@ export default function UpcomingEvents() {
             </div>
           </div>
           <div className="row">
-            {events.map((event) => (
-              <div
-                key={event.title}
-                className="col-lg-6 col-md-6 wow fadeInUp animated"
-                data-wow-delay={event.delay}
-              >
-                <div className="si__our__blog__box">
-                  <div className="si__our__blog__thumb">
-                    <div className="si__our__blog__thumb__inner">
-                      <img src={event.img} alt={event.title} />
+            {events.length === 0 ? (
+              <div className="col-12 text-center py-5 text-muted">
+                No upcoming events right now.
+              </div>
+            ) : (
+              events.map((event, idx) => (
+                <div
+                  key={event._id}
+                  className="col-lg-6 col-md-6 wow fadeInUp animated"
+                  data-wow-delay={`${0.5 + idx * 0.2}s`}
+                >
+                  <div className="si__our__blog__box">
+                    <div className="si__our__blog__thumb">
+                      <div className="si__our__blog__thumb__inner">
+                        <img
+                          src={event.imageUrl || "/assets/images/grip/blog2.png"}
+                          alt={event.title}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="si__our__blog__inner">
-                    <div className="si__our__blog__content">
-                      <a className="si__our__blog__content__text" href="#">
-                        {event.title}
-                      </a>
-                      <p>{event.desc}</p>
+                    <div className="si__our__blog__inner">
+                      <div className="si__our__blog__content">
+                        <a className="si__our__blog__content__text" href="/upcoming-events">
+                          {event.title}
+                        </a>
+                        <p>{event.description}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>
