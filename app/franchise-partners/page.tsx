@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -168,14 +169,14 @@ export default function FranchisePartnersPage() {
                 return (
                   <div key={zone._id} className="col-lg-4 col-md-6">
                     {showViewZone ? (
-                      <a
-                        href={`https://gripforum.com/${slug}/home`}
+                      <Link
+                        href={`/${slug}/home`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
                       >
                         {card}
-                      </a>
+                      </Link>
                     ) : (
                       card
                     )}
