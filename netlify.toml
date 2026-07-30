@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_PUBLIC_PHP_BACKEND_URL = "https://api.gripforum.com"
+  NEXT_PUBLIC_API_URL = "https://api.gripforum.com/api/admin"
+  NEXT_PUBLIC_IMAGE_URL = "https://api.gripforum.com/api/public"

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const IS_DEV = process.env.NODE_ENV === "development";
 const LOCAL  = "http://localhost:4002/api";
 const PROD   = "https://api.gripforum.com/api";
 const IMAGE_URL = "https://api.gripforum.com/api/public";
-const LOCAL_IMAGE_URL = "http://localhost:4002/api/public";
 
 async function tryFetch(paths: string[]): Promise<Response | null> {
   for (const url of paths) {
@@ -16,6 +16,13 @@ async function tryFetch(paths: string[]): Promise<Response | null> {
     } catch { /* try next */ }
   }
   return null;
+}
+
+function backends(...path: string[]) {
+  const urls = path.flatMap((p) =>
+    IS_DEV ? [`${LOCAL}${p}`, `${PROD}${p}`] : [`${PROD}${p}`]
+  );
+  return urls;
 }
 
 function slugify(s: string) {
@@ -33,10 +40,9 @@ export async function GET(req: NextRequest) {
 
   try {
     // ── 1. Find chapter by name slug via the PUBLIC mobile endpoint ────────
-    const listRes = await tryFetch([
-      `${LOCAL}/mobile/chapters/list?search=${encodeURIComponent(chapterSlug)}&limit=50`,
-      `${PROD}/mobile/chapters/list?search=${encodeURIComponent(chapterSlug)}&limit=50`,
-    ]);
+    const listRes = await tryFetch(
+      backends(`/mobile/chapters/list?search=${encodeURIComponent(chapterSlug)}&limit=50`)
+    );
     if (!listRes) {
       return NextResponse.json({ members: [], total: 0, chapterInfo: null });
     }
@@ -59,14 +65,8 @@ export async function GET(req: NextRequest) {
 
     // ── 2. Fetch head table members (with roles) + all members in parallel ─
     const [headRes, chapterRes] = await Promise.all([
-      tryFetch([
-        `${LOCAL}/mobile/chapters/headTableMembers/${chapterId}`,
-        `${PROD}/mobile/chapters/headTableMembers/${chapterId}`,
-      ]),
-      tryFetch([
-        `${LOCAL}/admin/chapters/${chapterId}`,
-        `${PROD}/admin/chapters/${chapterId}`,
-      ]),
+      tryFetch(backends(`/mobile/chapters/headTableMembers/${chapterId}`)),
+      tryFetch(backends(`/admin/chapters/${chapterId}`)),
     ]);
 
     const headJson    = headRes    ? await headRes.json()    : { data: [] };
@@ -83,11 +83,11 @@ export async function GET(req: NextRequest) {
     let usedLocal = false;
 
     try {
-      const localPubUrl = `${LOCAL}/public/chapters/by-slug?chapter=${encodeURIComponent(chapterSlug)}&zone=${encodeURIComponent(zoneSlug)}`;
-      const prodPubUrl  = `${PROD}/public/chapters/by-slug?chapter=${encodeURIComponent(chapterSlug)}&zone=${encodeURIComponent(zoneSlug)}`;
-      const pubRes = await tryFetch([localPubUrl, prodPubUrl]);
+      const pubRes = await tryFetch(
+        backends(`/public/chapters/by-slug?chapter=${encodeURIComponent(chapterSlug)}&zone=${encodeURIComponent(zoneSlug)}`)
+      );
       if (pubRes) {
-        usedLocal = pubRes.url?.startsWith(LOCAL) ?? false;
+        usedLocal = IS_DEV && (pubRes.url?.startsWith(LOCAL) ?? false);
         const pubJson = await pubRes.json();
         if (pubJson.success) {
           headTableRoles = pubJson.headTable  || [];
@@ -159,7 +159,7 @@ export async function GET(req: NextRequest) {
     }
 
     // ── 5. Chapter info ────────────────────────────────────────────────────
-    const baseImageUrl = usedLocal ? LOCAL_IMAGE_URL : IMAGE_URL;
+    const baseImageUrl = usedLocal ? "http://localhost:4002/api/public" : IMAGE_URL;
     const bgImageUrl = bgImage?.docPath && bgImage?.docName
       ? `${baseImageUrl}/${bgImage.docPath}/${bgImage.docName}`
       : null;
