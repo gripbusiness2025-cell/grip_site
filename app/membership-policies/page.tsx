@@ -44,8 +44,8 @@ export default function MembershipPolicies() {
                 </p>
                 <span>
                   <i className="fa-solid fa-check"></i>{" "}
-                  <strong>Attendance:</strong> Associates are allowed up to three
-                  absences. A fourth absence results in automatic termination.
+                  <strong>Attendance:</strong> Associates are allowed up to four
+                  absences (In a rolling period of 6 months). A fifth absence results in automatic termination.
                 </span>
                 <span>
                   <i className="fa-solid fa-check"></i>{" "}
@@ -54,8 +54,8 @@ export default function MembershipPolicies() {
                 </span>
                 <span>
                   <i className="fa-solid fa-check"></i>{" "}
-                  <strong>Dress Code:</strong> Business Attire/Suit, formal shoes,
-                  GRIP pin, and associate batch are mandatory at all meetings.
+                  <strong>Dress Code:</strong> Business Attire / Suit, Formal Shoes,
+                  GRIP Pin and Associate Batch are mandatory at all meetings.
                 </span>
               </div>
 

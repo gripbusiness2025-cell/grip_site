@@ -48,7 +48,9 @@ export default function Contact() {
                     </div>
                     <div className="si__contact__number">
                       <span>Contact</span>
-                      <h6>+91&nbsp; 81&nbsp;2222&nbsp;9550</h6>
+                      <h6>
+                        <a href="tel:+919841012721">+91&nbsp; 98410&nbsp;12721</a>
+                      </h6>
                     </div>
                   </div>
                 </div>

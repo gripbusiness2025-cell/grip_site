@@ -125,7 +125,7 @@ export default function Terms() {
                 <p>For any questions or concerns, feel free to contact us:</p>
                 <ul>
                   <li>Email: care@gripforum.com</li>
-                  <li>Phone: +91 8122229550</li>
+                  <li>Phone: +91 98410 12721</li>
                   <li>
                     Website:{" "}
                     <a

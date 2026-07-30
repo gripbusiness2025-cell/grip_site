@@ -59,7 +59,10 @@ export default function FranchisePartnersPage() {
   return (
     <>
       <Header />
-      <Breadcrumb title="Franchise Partners" />
+      <Breadcrumb
+        title="Franchise Partners"
+        backgroundImage="/assets/images/grip/chapter2.jpg"
+      />
 
       <section className="pb-120 pt-90">
         <div className="container">
@@ -105,21 +108,17 @@ export default function FranchisePartnersPage() {
             <div className="row g-4">
               {zones.map((zone) => {
                 const slug = slugify(zone.zoneName);
-                return (
-                  <div key={zone._id} className="col-lg-4 col-md-6">
-                    <Link
-                      href={`/${slug}`}
-                      style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
-                    >
+                const showViewZone = !["chennai-south-zone", "viruthunagar-zone"].includes(slug);
+                const card = (
                       <div
-                        className="franchise-zone-card"
+                        className={showViewZone ? "franchise-zone-card" : undefined}
                         style={{
                           background: "#fff",
                           border: "1px solid #eee",
                           borderRadius: 12,
                           padding: "28px 24px",
                           height: "100%",
-                          transition: "box-shadow .2s, transform .2s, border-color .2s",
+                          transition: showViewZone ? "box-shadow .2s, transform .2s, border-color .2s" : undefined,
                         }}
                       >
                         <div
@@ -138,10 +137,10 @@ export default function FranchisePartnersPage() {
                         >
                           <i className="fa-solid fa-map-location-dot" />
                         </div>
-                        <h4 style={{ fontWeight: 800, marginBottom: 8, color: "#111", fontSize: "1.15rem" }}>
+                        <h4 style={{ fontWeight: 800, marginBottom: 8, color: "#111", fontSize: "1.15rem", textTransform: "uppercase" }}>
                           {zone.zoneName}
                         </h4>
-                        <p style={{ color: "#888", fontSize: 13, marginBottom: 12 }}>
+                        <p style={{ color: "#888", fontSize: 13, marginBottom: showViewZone ? 12 : 0 }}>
                           {[zone.stateName, zone.countryName].filter(Boolean).join(" · ") || "—"}
                         </p>
                         {zone.name && (
@@ -150,21 +149,37 @@ export default function FranchisePartnersPage() {
                             {zone.name}
                           </p>
                         )}
-                        <div
-                          style={{
-                            marginTop: 18,
-                            color: "#c1272d",
-                            fontWeight: 700,
-                            fontSize: 13,
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: 6,
-                          }}
-                        >
-                          View Zone <i className="fa-solid fa-arrow-right" style={{ fontSize: 11 }} />
-                        </div>
+                        {showViewZone && (
+                          <div
+                            style={{
+                              marginTop: 18,
+                              color: "#c1272d",
+                              fontWeight: 700,
+                              fontSize: 13,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 6,
+                            }}
+                          >
+                            View Zone <i className="fa-solid fa-arrow-right" style={{ fontSize: 11 }} />
+                          </div>
+                        )}
                       </div>
-                    </Link>
+                );
+                return (
+                  <div key={zone._id} className="col-lg-4 col-md-6">
+                    {showViewZone ? (
+                      <Link
+                        href={`/${slug}/home`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
+                      >
+                        {card}
+                      </Link>
+                    ) : (
+                      card
+                    )}
                   </div>
                 );
               })}

@@ -15,6 +15,27 @@ body {
   padding: 0;
 }
 
+/* Prevent logo from overflowing into the hero (cached large assets) */
+.si__header__logo img {
+  height: 48px !important;
+  width: auto !important;
+  max-width: 140px !important;
+  object-fit: contain !important;
+}
+.si__fotter__two__box__icon img,
+.chapter-mainbar-logo {
+  height: 48px !important;
+  width: auto !important;
+  max-width: 160px !important;
+  object-fit: contain !important;
+}
+.preloader__logo img {
+  max-height: 72px !important;
+  width: auto !important;
+  max-width: 180px !important;
+  object-fit: contain !important;
+}
+
 /* ── Animation speed overrides ─────────────────────────────────────────────
    WOW.js / animate.css elements default to 1s. Cap them at 0.55s so every
    fadeIn / slideIn / zoomIn on the home and about pages feels crisp.

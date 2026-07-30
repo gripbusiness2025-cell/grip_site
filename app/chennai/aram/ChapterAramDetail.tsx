@@ -103,11 +103,11 @@ function ChapterHeader() {
 
       {/* White logo + nav bar */}
 
-      
+
       <div className="chapter-mainbar">
         <div className="container chapter-mainbar-inner">
           <a href="https://gripforum.com" target="_blank" rel="noreferrer" className="chapter-mainbar-brand">
-            <img src="/assets/images/logo/grip.png" alt="GRIP" className="chapter-mainbar-logo" />
+            <img src="/assets/images/logo/grip.png?v=old" alt="GRIP" className="chapter-mainbar-logo" />
             <span className="chapter-mainbar-divider" />
             <span className="chapter-mainbar-name">Aram</span>
           </a>

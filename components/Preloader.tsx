@@ -44,7 +44,7 @@ export default function Preloader() {
         <div id="loading-center-absolute">
           <div className="preloader__content text-center">
             <div className="preloader__logo">
-              <img src="/assets/images/logo/grip.png" alt="GRIP" className="logo-blink" />
+              <img src="/assets/images/logo/grip.png?v=old" alt="GRIP" className="logo-blink" />
             </div>
             <div id="st-loading-bar" className="preloader__bar">
               <div

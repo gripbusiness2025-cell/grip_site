@@ -135,6 +135,35 @@ export default function Privacy() {
               </div>
             </div>
 
+            {/* Data Deletion */}
+            <div className="col-lg-6">
+              <div className="privacy-card" style={{ borderTopColor: "#e74c3c" }}>
+                <div className="privacy-card-head">
+                  <span className="privacy-icon" style={{ background: "#e74c3c18" }}>
+                    <i className="fa-solid fa-trash-can" style={{ color: "#e74c3c" }} />
+                  </span>
+                  <h5>Data Deletion</h5>
+                </div>
+                <p>
+                  Users may request the deletion of their personal data (if stored) by contacting support.
+                </p>
+                <ul>
+                  <li>
+                    Contact Number:{" "}
+                    <a href="tel:+919841012721" style={{ color: "#c1272d", fontWeight: 600 }}>
+                      +91 98410 12721
+                    </a>
+                  </li>
+                  <li>
+                    Email:{" "}
+                    <a href="mailto:care@gripforum.com" style={{ color: "#c1272d", fontWeight: 600 }}>
+                      care@gripforum.com
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             {/* Contact Us */}
             <div className="col-lg-6">
               <div className="privacy-card" style={{ borderTopColor: "#2980b9" }}>

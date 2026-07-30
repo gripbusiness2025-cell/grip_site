@@ -120,6 +120,22 @@ export default function Policies() {
                   </li>
                   <li>You can manage notification preferences in the app settings.</li>
                 </ul>
+
+                <h5 className="mt-4 mb-2">🗑️ Data Deletion</h5>
+                <ul>
+                  <li>
+                    Users may request the deletion of their personal data (if stored)
+                    by contacting support.
+                  </li>
+                  <li>
+                    Contact Number:{" "}
+                    <a href="tel:+919841012721">+91 98410 12721</a>
+                  </li>
+                  <li>
+                    Email:{" "}
+                    <a href="mailto:care@gripforum.com">care@gripforum.com</a>
+                  </li>
+                </ul>
               </div>
 
               <div

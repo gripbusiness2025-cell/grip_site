@@ -24,7 +24,7 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
             <div className="col-lg-2">
               <div className="si__header__logo">
                 <Link href="/">
-                  <img src="/assets/images/logo/grip.png" alt="logo" />
+                  <img src="/assets/images/logo/grip.png?v=old" alt="logo" />
                 </Link>
               </div>
             </div>
@@ -227,7 +227,7 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
                     <ul>
                       <li>
                         <i className="fa-light fa-phone"></i>{" "}
-                        <a href="tel:+918122229550">+91 8122229550</a>
+                        <a href="tel:+919841012721">+91 98410 12721</a>
                       </li>
                       <li>
                         <i className="fa-light fa-envelope"></i>{" "}
