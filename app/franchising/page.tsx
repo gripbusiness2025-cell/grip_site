@@ -186,14 +186,14 @@ export default function Franchising() {
                   For franchising opportunities in India and internationally, get in
                   touch with
                 </p>
-                <h4 className="mt-3 mb-1 text-white">Mr. Pugalenthi Palanivelu</h4>
+                <h4 className="mt-3 mb-1 text-white">N. Mahalakshmi</h4>
                 <a
-                  href="https://wa.me/919962456533"
+                  href="https://wa.me/918015846832"
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-danger text-dark fw-bold px-4 py-2 mt-3 rounded-pill"
                 >
-                  Contact on WhatsApp <strong>+91 99624 56533</strong>
+                  Contact on WhatsApp <strong>+91 80158 46832</strong>
                 </a>
               </div>
             </div>
