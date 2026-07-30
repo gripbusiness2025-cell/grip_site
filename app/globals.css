@@ -1,26 +1,52 @@
-@import "tailwindcss";
+/* 
+  Global styles - the main styles are loaded via link tags in layout.tsx
+  from the /assets/css/ folder (Bootstrap, theme-default, style.css, etc.)
+  This file handles only Next.js-specific overrides.
+*/
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Ensure Next.js doesn't interfere with existing layout */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+/* ── Animation speed overrides ─────────────────────────────────────────────
+   WOW.js / animate.css elements default to 1s. Cap them at 0.55s so every
+   fadeIn / slideIn / zoomIn on the home and about pages feels crisp.
+   The rotateme / marquee / progress-bar animations are excluded because they
+   use different class names and rely on their specific durations.
+*/
+.animated {
+  animation-duration: 0.55s !important;
+}
+
+/* GSAP reveal: make visible immediately so there's no blank flash while
+   scripts load. GSAP will set autoAlpha:1 via the timeline anyway. */
+.reveal-left,
+.reveal-bottom {
+  visibility: visible !important;
+  will-change: transform, opacity;
+}
+
+/* Inner page header global override */
+.si__header__area.inner-page-header,
+#header-sticky.inner-page-header {
+  background-color: #fff !important;
+  background: #fff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  border-bottom: 1px solid #eaeaea !important;
+  z-index: 999 !important;
+}
+.si__header__area.inner-page-header .si__header__menu,
+#header-sticky.inner-page-header .si__header__menu {
+  border: 1px solid #eaeaea !important;
+}
+
+
