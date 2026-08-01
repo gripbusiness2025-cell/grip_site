@@ -15,7 +15,7 @@ function toTitle(slug: string) {
 function avatarUrl(img?: { docPath?: string; docName?: string } | null) {
   if (img?.docPath && img?.docName)
     return `${IMAGE_URL}/${img.docPath}/${img.docName}`;
-  return "/assets/images/logo/grip.png";
+  return "/assets/images/logo/gripbg.png";
 }
 
 /* ─── types ───────────────────────────────────── */

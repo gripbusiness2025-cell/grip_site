@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="si__fotter__two__box">
                 <div className="si__fotter__two__box__icon">
                   <Link href="/">
-                    <img src="/assets/images/logo/grip.png?v=old" alt="GRIP Logo" />
+                    <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum" />
                   </Link>
                   <p>
                     GRIP - India&apos;s First Paperless Digital empowered referral

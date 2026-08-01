@@ -30,7 +30,7 @@ function TeamCard({ member }: { member: Associate }) {
             src={`${BACKEND_URL}/application/uploads/${member.photo}`}
             alt={member.name}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "/assets/images/logo/grip.png";
+              (e.target as HTMLImageElement).src = "/assets/images/logo/gripbg.png";
             }}
           />
         </div>

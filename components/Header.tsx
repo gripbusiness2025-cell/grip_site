@@ -24,7 +24,7 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
             <div className="col-lg-2">
               <div className="si__header__logo">
                 <Link href="/">
-                  <img src="/assets/images/logo/grip.png?v=old" alt="logo" />
+                  <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum" />
                 </Link>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
                 <div className="content-inner">
                   <div className="logo">
                     <Link href="/">
-                      <img src="/assets/images/logo/logo__white.png" alt="" />
+                      <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum" />
                     </Link>
                   </div>
                   <div className="content-text">

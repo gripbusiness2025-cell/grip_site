@@ -27,7 +27,7 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/icon" href="/assets/images/logo/grip.png" />
+        <link rel="icon" type="image/png" href="/assets/images/logo/gripbg.png?v=1" />
         {/* Preload above-the-fold images */}
         <link rel="preload" as="image" href="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" />
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />

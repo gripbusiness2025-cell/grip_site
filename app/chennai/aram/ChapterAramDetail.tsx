@@ -39,7 +39,7 @@ function groupByRole(members: Associate[], roles: string[]) {
 function MemberCard({ member }: { member: Associate }) {
   const photo = member.photo
     ? `${BACKEND_URL}/application/uploads/${member.photo}`
-    : "/assets/images/logo/grip.png";
+    : "/assets/images/logo/gripbg.png";
 
   return (
     <div className="chapter-member-card">
@@ -49,7 +49,7 @@ function MemberCard({ member }: { member: Associate }) {
           alt={member.name}
           className="chapter-member-photo"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "/assets/images/logo/grip.png";
+            (e.target as HTMLImageElement).src = "/assets/images/logo/gripbg.png";
           }}
         />
       </div>
@@ -107,7 +107,7 @@ function ChapterHeader() {
       <div className="chapter-mainbar">
         <div className="container chapter-mainbar-inner">
           <a href="https://gripforum.com" target="_blank" rel="noreferrer" className="chapter-mainbar-brand">
-            <img src="/assets/images/logo/grip.png?v=old" alt="GRIP" className="chapter-mainbar-logo" />
+            <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum" className="chapter-mainbar-logo" />
             <span className="chapter-mainbar-divider" />
             <span className="chapter-mainbar-name">Aram</span>
           </a>

@@ -15,24 +15,30 @@ body {
   padding: 0;
 }
 
-/* Prevent logo from overflowing into the hero (cached large assets) */
+/* Full GRIP wordmark + tagline — keep constrained so hero never overflows */
 .si__header__logo img {
-  height: 48px !important;
+  height: 72px !important;
   width: auto !important;
   max-width: 140px !important;
   object-fit: contain !important;
 }
 .si__fotter__two__box__icon img,
 .chapter-mainbar-logo {
-  height: 48px !important;
+  height: 72px !important;
   width: auto !important;
-  max-width: 160px !important;
+  max-width: 150px !important;
   object-fit: contain !important;
 }
 .preloader__logo img {
-  max-height: 72px !important;
+  max-height: 120px !important;
   width: auto !important;
-  max-width: 180px !important;
+  max-width: 200px !important;
+  object-fit: contain !important;
+}
+.sidebar-info-contents .logo img {
+  max-height: 90px !important;
+  width: auto !important;
+  max-width: 170px !important;
   object-fit: contain !important;
 }
 
