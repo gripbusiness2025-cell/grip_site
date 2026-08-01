@@ -142,7 +142,7 @@ export default function Footer() {
           <div className="row">
             <div className="col-lg-6">
               <div className="si__copyright__content">
-                <p>© GRIP 2025 | All Rights Reserved</p>
+                <p>© GRIP 2026 | All Rights Reserved</p>
               </div>
             </div>
             <div className="col-lg-6">

@@ -310,32 +310,22 @@ export default async function Home() {
       {/* Text Marquee */}
       <section className="marquee-section mb-120">
         <div className="marquee">
-          <div className="marquee-group">
-            <div className="text" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/1.png" alt="" /> 1st Digital
-              Business Networking Platform
+          {[0, 1].map((group) => (
+            <div className="marquee-group" key={group}>
+              <div className="text">
+                ✅ India&apos;s 1st Digital Business Networking Platform
+              </div>
+              <div className="text weight">✅ Business Mentor Guidance</div>
+              <div className="text">✅ FREE Business Webpage</div>
+              <div className="text weight">✅ One-Touch GRIP App</div>
+              <div className="text">✅ Geo-Location Attendance</div>
+              <div className="text weight">
+                ✅ Zero Paperwork &amp; 100% Digital Platform
+              </div>
+              <div className="text">✅ Real Business Referrals</div>
+              <div className="text weight">✅ Knowledge Sharing Sessions</div>
             </div>
-            <div className="text weight" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/2.png" alt="" /> Thought
-              Leadership
-            </div>
-            <div className="text" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/3.png" alt="" /> Cross-Industry
-            </div>
-          </div>
-          <div className="marquee-group">
-            <div className="text weight" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/2.png" alt="" /> First Fully
-              Digitally Empowered Networking Platform
-            </div>
-            <div className="text" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/1.png" alt="" /> Grow &amp;
-              Innovate
-            </div>
-            <div className="text" data-text="Visionary Consulting">
-              <img src="/assets/images/text-animation/3.png" alt="" /> Connect
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 

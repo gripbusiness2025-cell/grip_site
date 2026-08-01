@@ -98,12 +98,14 @@ function MemberCard({ member, showRoleTop = false, profileLink }: { member: Memb
 function RoleGroup({ title, members, memberLinks = {} }: { title: string; members: Member[]; memberLinks?: Record<string, string> }) {
   if (!members.length) return null;
   return (
-    <div className="chapter-role-section">
-      <div className="chapter-role-divider"><span>{title}</span></div>
-      <div className="chapter-members-grid">
-        {members.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
+    <>
+      <div className="chapter-leadership-header"><h3>{title}</h3></div>
+      <div className="chapter-role-section">
+        <div className="chapter-members-grid">
+          {members.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -250,7 +252,9 @@ export default function ChapterDetail({
   const assignedIds = new Set(
     [...headTeam, ...assocCom, ...coordTeam, ...visitorTeam].map((m) => m._id)
   );
-  const associates  = members.filter((m) => !assignedIds.has(m._id));
+  const associates  = members
+    .filter((m) => !assignedIds.has(m._id))
+    .sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" }));
 
   // totalCount used for role grouping sections
   const totalCount = members.length;
@@ -338,9 +342,9 @@ export default function ChapterDetail({
                 </div>
               </div>
             )}
+            <RoleGroup title="Visitor Interaction Team" members={visitorTeam} memberLinks={memberLinks} />
             <RoleGroup title="Associate Committee" members={assocCom} memberLinks={memberLinks} />
             <RoleGroup title="Coordinator Team" members={coordTeam} memberLinks={memberLinks} />
-            <RoleGroup title="Visitor Interaction Team" members={visitorTeam} memberLinks={memberLinks} />
           </div>
         </section>
       )}
