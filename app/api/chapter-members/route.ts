@@ -99,20 +99,36 @@ export async function GET(req: NextRequest) {
         ? `${IMAGE_URL}/${img.docPath}/${img.docName}`
         : null;
 
+    const linkMap: Record<string, string> = {};
+    if (Array.isArray(memberLinks)) {
+      memberLinks.forEach((item: any) => {
+        const mid = String(item.memberId || item.id || item._id || "").trim();
+        const link = (item.profileLink || item.link || item.url || "").trim();
+        if (mid && link) {
+          linkMap[mid] = link;
+        }
+      });
+    }
+
     let members: any[] = [];
 
     if (headTableRoles.length || associateList.length) {
       // New public endpoint available — use structured data
       const norm = (arr: any[], defaultRole: string) =>
-        arr.map((m: any) => ({
-          _id: m.id,
-          name: m.name || "—",
-          role: m.role || defaultRole,
-          company: m.company || "",
-          email: m.email || "",
-          phone: m.phone || "",
-          photo: photoUrl(m.profileImage),
-        }));
+        arr.map((m: any) => {
+          const id = String(m.id || m._id || m.memberId || "");
+          const link = m.profileLink || linkMap[id] || "";
+          return {
+            _id: id,
+            name: m.name || "—",
+            role: m.role || defaultRole,
+            company: m.company || "",
+            email: m.email || "",
+            phone: m.phone || "",
+            photo: photoUrl(m.profileImage),
+            profileLink: link,
+          };
+        });
       members = [...norm(headTableRoles, "Head Team"), ...norm(associateList, "Associate")];
     } else {
       // Legacy fallback: headTableUsers (CID/Mentors) + all chapter members
@@ -122,15 +138,20 @@ export async function GET(req: NextRequest) {
       const headIds   = new Set(headUsers.map((u: any) => String(u.id || u._id)).filter(id => id !== "undefined"));
       const headNames = new Set(headUsers.map((u: any) => (u.name || "").toLowerCase().trim()));
 
-      const headMapped = headUsers.map((u: any, i: number) => ({
-        _id: String(u.id || u._id || `head-${i}`),
-        name: u.name || "—",
-        role: u.roleName || u.position || "Head Team",
-        company: u.companyName || "",
-        email: u.email || "",
-        phone: u.mobileNumber || "",
-        photo: photoUrl(u.profileImage),
-      }));
+      const headMapped = headUsers.map((u: any, i: number) => {
+        const id = String(u.id || u._id || `head-${i}`);
+        const link = u.profileLink || linkMap[id] || "";
+        return {
+          _id: id,
+          name: u.name || "—",
+          role: u.roleName || u.position || "Head Team",
+          company: u.companyName || "",
+          email: u.email || "",
+          phone: u.mobileNumber || "",
+          photo: photoUrl(u.profileImage),
+          profileLink: link,
+        };
+      });
 
       const restMapped = allMembers
         .filter((m: any) => {
@@ -138,15 +159,20 @@ export async function GET(req: NextRequest) {
           const name = (m.name || "").toLowerCase().trim();
           return !headIds.has(id) && !headNames.has(name);
         })
-        .map((m: any, i: number) => ({
-          _id: String(m.id || m._id || `member-${i}`),
-          name: m.name || "—",
-          role: "Associate",
-          company: "",
-          email: m.email || "",
-          phone: m.mobileNumber || "",
-          photo: null,
-        }));
+        .map((m: any, i: number) => {
+          const id = String(m.id || m._id || `member-${i}`);
+          const link = m.profileLink || linkMap[id] || "";
+          return {
+            _id: id,
+            name: m.name || "—",
+            role: "Associate",
+            company: "",
+            email: m.email || "",
+            phone: m.mobileNumber || "",
+            photo: null,
+            profileLink: link,
+          };
+        });
 
       members = [...headMapped, ...restMapped];
     }

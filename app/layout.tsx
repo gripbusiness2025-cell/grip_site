@@ -6,13 +6,18 @@ export const metadata: Metadata = {
   title: "GRIP – Global Referral Interacting Platform for Professional Networking",
   description:
     "GRIP is a global referral-based networking platform fostering ethical collaboration, structured business growth, and meaningful professional connections.",
+  icons: {
+    icon: "/assets/images/logo/logo-grip.jpg",
+    shortcut: "/assets/images/logo/logo-grip.jpg",
+    apple: "/assets/images/logo/logo-grip.jpg",
+  },
   openGraph: {
     title: "GRIP – Global Referral Interacting Platform for Professional Networking",
     description:
       "Join GRIP, the trusted global platform for professionals to build referral-based connections, collaborate ethically, and grow through structured networking.",
     url: "https://gripforum.com/",
     type: "website",
-    images: [{ url: "https://gripforum.com/assets/images/logo/logo.png" }],
+    images: [{ url: "https://gripforum.com/assets/images/logo/logo-grip.jpg" }],
   },
 };
 
@@ -27,7 +32,8 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/png" href="/assets/images/logo/gripbg.png?v=1" />
+        <link rel="icon" type="image/jpeg" href="/assets/images/logo/logo-grip.jpg" />
+        <link rel="shortcut icon" href="/assets/images/logo/logo-grip.jpg" />
         {/* Preload above-the-fold images */}
         <link rel="preload" as="image" href="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" />
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />

@@ -28,6 +28,7 @@ interface Member {
   email?: string;
   phone?: string;
   photo?: string | null;
+  profileLink?: string | null;
 }
 
 function MemberCard({ member, showRoleTop = false, profileLink }: { member: Member; showRoleTop?: boolean; profileLink?: string }) {
@@ -37,6 +38,11 @@ function MemberCard({ member, showRoleTop = false, profileLink }: { member: Memb
   const email   = member.email || "";
   const phone   = member.phone || "";
   const hasPhoto = !!member.photo;
+
+  const rawLink = (profileLink || member.profileLink || "").trim();
+  const hrefUrl = rawLink
+    ? (/^https?:\/\//i.test(rawLink) ? rawLink : `https://${rawLink}`)
+    : null;
 
   const initials = name
     .split(" ")
@@ -81,14 +87,16 @@ function MemberCard({ member, showRoleTop = false, profileLink }: { member: Memb
             {phone && <a href={`tel:${phone}`}    title={phone}><i className="fa-solid fa-phone" /></a>}
             {email && <a href={`mailto:${email}`} title={email}><i className="fa-solid fa-envelope" /></a>}
           </div>
-          <a
-            href={profileLink || "https://user.gripforum.com/"}
-            target="_blank"
-            rel="noreferrer"
-            className="chapter-view-profile"
-          >
-            View Profile <i className="fa-solid fa-chevron-right" style={{ fontSize: "10px" }} />
-          </a>
+          {hrefUrl && (
+            <a
+              href={hrefUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="chapter-view-profile"
+            >
+              View Profile <i className="fa-solid fa-chevron-right" style={{ fontSize: "10px" }} />
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -249,12 +257,10 @@ export default function ChapterDetail({
     !COORD_ROLES.some((r) => roleOf(m).includes(r)) &&
     VISITOR_TEAM_ROLES.some((r) => roleOf(m).includes(r))
   );
-  const assignedIds = new Set(
-    [...headTeam, ...assocCom, ...coordTeam, ...visitorTeam].map((m) => m._id)
+
+  const allAssociates = [...members].sort((a, b) =>
+    (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
   );
-  const associates  = members
-    .filter((m) => !assignedIds.has(m._id))
-    .sort((a, b) => (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" }));
 
   // totalCount used for role grouping sections
   const totalCount = members.length;
@@ -349,14 +355,14 @@ export default function ChapterDetail({
         </section>
       )}
 
-      {/* ── Chapter Associates (all remaining members) ── */}
-      {!loading && members.length > 0 && (
+      {/* ── Chapter Associates (all members) ── */}
+      {!loading && allAssociates.length > 0 && (
         <section className="chapter-leadership-section" id="members">
           <div className="container">
             <div className="chapter-leadership-header"><h3>Chapter Associates</h3></div>
             <div className="chapter-role-section">
               <div className="chapter-members-grid">
-                {associates.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
+                {allAssociates.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
               </div>
             </div>
           </div>
