@@ -22,25 +22,6 @@ export default function Contact() {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__contact__mine">
-                {/* Chapter Mentor */}
-                <div
-                  className="si__contact__box wow fadeInUp animated"
-                  data-wow-delay=".7s"
-                >
-                  <div className="si__contact__box__inner">
-                    <div className="si__contact__icon">
-                      <i
-                        className="fa-solid fa-user-tie"
-                        style={{ fontSize: "32px", color: "#DF2E2E" }}
-                      />
-                    </div>
-                    <div className="si__contact__number">
-                      <span>Chapter Mentor</span>
-                      <h6>Ms. Priyadharshini</h6>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Phone */}
                 <div
                   className="si__contact__box wow fadeInUp animated"

@@ -68,13 +68,25 @@ export default function ZoneContactPage({ params }: Props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__contact__mine">
-                {/* Executive Director Name */}
-                <div
-                  className="si__contact__box"
-                >
+                {/* Chapter Mentor Name & Phone */}
+                <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
-                      <i className="fa-solid fa-user-tie" style={{ fontSize: "32px", color: "#DF2E2E" }} />
+                      <i className="fa-solid fa-user-tie" style={{ fontSize: "24px", color: "#DF2E2E" }} />
+                    </div>
+                    <div className="si__contact__number">
+                      <span>Chapter Mentor</span>
+                      <h6>Ms. Priyadharshini</h6>
+                      <a href="tel:+919841012721">+91 98410 12721</a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Executive Director Name */}
+                <div className="si__contact__box">
+                  <div className="si__contact__box__inner">
+                    <div className="si__contact__icon">
+                      <i className="fa-solid fa-user-gear" style={{ fontSize: "24px", color: "#DF2E2E" }} />
                     </div>
                     <div className="si__contact__number">
                       <span>Executive Director</span>
@@ -82,22 +94,20 @@ export default function ZoneContactPage({ params }: Props) {
                         {loading ? (
                           <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
                         ) : (
-                          edDetails?.name || "not available"
+                          edDetails?.name || "Gandhi"
                         )}
                       </h6>
                     </div>
                   </div>
                 </div>
 
-                {/* Phone */}
-                <div
-                  className="si__contact__box"
-                >
+                {/* ED Phone */}
+                <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
                       <svg
-                        width="43"
-                        height="43"
+                        width="28"
+                        height="28"
                         viewBox="0 0 43 43"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -113,29 +123,27 @@ export default function ZoneContactPage({ params }: Props) {
                       </svg>
                     </div>
                     <div className="si__contact__number">
-                      <span>Contact</span>
+                      <span>ED Contact</span>
                       <h6>
                         {loading ? (
                           <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
                         ) : edDetails?.phone ? (
                           <a href={`tel:${edDetails.phone}`}>{edDetails.phone}</a>
                         ) : (
-                          "not available"
+                          <a href="tel:9551205555">9551205555</a>
                         )}
                       </h6>
                     </div>
                   </div>
                 </div>
 
-                {/* Email */}
-                <div
-                  className="si__contact__box"
-                >
+                {/* ED Email */}
+                <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
                       <svg
-                        width="45"
-                        height="45"
+                        width="28"
+                        height="28"
                         viewBox="0 0 45 45"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -151,14 +159,14 @@ export default function ZoneContactPage({ params }: Props) {
                       </svg>
                     </div>
                     <div className="si__contact__number">
-                      <span>Email</span>
+                      <span>ED Email</span>
                       <h6>
                         {loading ? (
                           <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
                         ) : edDetails?.email ? (
                           <a href={`mailto:${edDetails.email}`}>{edDetails.email}</a>
                         ) : (
-                          "not available"
+                          <a href="mailto:altronindia@gmail.com">altronindia@gmail.com</a>
                         )}
                       </h6>
                     </div>
@@ -279,6 +287,96 @@ export default function ZoneContactPage({ params }: Props) {
       <Footer />
 
       <style>{`
+        .si__contact__mine {
+          display: grid !important;
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 20px !important;
+        }
+        @media (max-width: 1200px) {
+          .si__contact__mine {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .si__contact__mine {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        .si__contact__box {
+          width: 100% !important;
+          padding: 24px 20px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border-radius: 18px !important;
+          display: flex !important;
+          align-items: center !important;
+          min-height: 110px !important;
+          background: #fff !important;
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        .si__contact__box__inner {
+          display: flex !important;
+          align-items: center !important;
+          gap: 16px !important;
+          width: 100% !important;
+        }
+
+        .si__contact__icon {
+          width: 64px !important;
+          height: 64px !important;
+          min-width: 64px !important;
+          min-height: 64px !important;
+          line-height: 64px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border-radius: 16px !important;
+          border: 1px solid #DF2E2E !important;
+          flex-shrink: 0 !important;
+        }
+
+        .si__contact__number {
+          margin-left: 0 !important;
+          flex: 1 !important;
+          min-width: 0 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+        }
+
+        .si__contact__number span {
+          position: static !important;
+          top: 0 !important;
+          font-size: 13px !important;
+          font-weight: 700 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.3px !important;
+          color: #555 !important;
+          margin-bottom: 3px !important;
+          display: block !important;
+          line-height: 1.2 !important;
+        }
+
+        .si__contact__number h6 {
+          position: static !important;
+          top: 0 !important;
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          color: #111 !important;
+          margin: 0 !important;
+          line-height: 1.3 !important;
+          word-break: break-word !important;
+        }
+
+        .si__contact__number a {
+          color: #DF2E2E !important;
+          text-decoration: none !important;
+          font-weight: 600 !important;
+          word-break: break-all !important;
+        }
+
         @keyframes shimmer {
           0% { background-position: -200px 0; }
           100% { background-position: 200px 0; }
