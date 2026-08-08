@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { use } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-const PROD_API   = "https://api.gripforum.com/api";
 const BACKEND_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://api.gripforum.com";
-
-const slugify = (s: string) =>
-  (s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 interface Props {
   params: Promise<{ zone: string }>;
@@ -17,45 +13,6 @@ interface Props {
 
 export default function ZoneContactPage({ params }: Props) {
   const { zone: zoneSlug } = use(params);
-  
-  const [edDetails, setEdDetails] = useState<{
-    name: string;
-    phone: string;
-    email: string;
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchED() {
-      setLoading(true);
-      for (const base of [PROD_API]) {
-        try {
-          const res = await fetch(`${base}/admin/zones/list/public`, { cache: "no-store" });
-          if (!res.ok) continue;
-          const json = await res.json();
-          if (json.success && Array.isArray(json.data)) {
-            const matchedZone = json.data.find(
-              (z: any) => slugify(z.zoneName) === zoneSlug
-            );
-            if (matchedZone) {
-              setEdDetails({
-                name: matchedZone.name || "",
-                phone: matchedZone.mobileNumber || "",
-                email: matchedZone.email || "",
-              });
-              setLoading(false);
-              return;
-            }
-          }
-        } catch (e) {
-          // try next
-        }
-      }
-      setEdDetails(null);
-      setLoading(false);
-    }
-    fetchED();
-  }, [zoneSlug]);
 
   return (
     <>
@@ -68,7 +25,7 @@ export default function ZoneContactPage({ params }: Props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__contact__mine">
-                {/* Chapter Mentor Name & Phone */}
+                {/* Chapter Mentor */}
                 <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
@@ -77,31 +34,11 @@ export default function ZoneContactPage({ params }: Props) {
                     <div className="si__contact__number">
                       <span>Chapter Mentor</span>
                       <h6>Ms. Priyadharshini</h6>
-                      <a href="tel:+919841012721">+91 98410 12721</a>
                     </div>
                   </div>
                 </div>
 
-                {/* Executive Director Name */}
-                <div className="si__contact__box">
-                  <div className="si__contact__box__inner">
-                    <div className="si__contact__icon">
-                      <i className="fa-solid fa-user-gear" style={{ fontSize: "24px", color: "#DF2E2E" }} />
-                    </div>
-                    <div className="si__contact__number">
-                      <span>Executive Director</span>
-                      <h6>
-                        {loading ? (
-                          <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
-                        ) : (
-                          edDetails?.name || "Gandhi"
-                        )}
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ED Phone */}
+                {/* Contact */}
                 <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
@@ -123,21 +60,15 @@ export default function ZoneContactPage({ params }: Props) {
                       </svg>
                     </div>
                     <div className="si__contact__number">
-                      <span>ED Contact</span>
+                      <span>Contact</span>
                       <h6>
-                        {loading ? (
-                          <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
-                        ) : edDetails?.phone ? (
-                          <a href={`tel:${edDetails.phone}`}>{edDetails.phone}</a>
-                        ) : (
-                          <a href="tel:9551205555">9551205555</a>
-                        )}
+                        <a href="tel:+919841012721">+91 98410 12721</a>
                       </h6>
                     </div>
                   </div>
                 </div>
 
-                {/* ED Email */}
+                {/* Email */}
                 <div className="si__contact__box">
                   <div className="si__contact__box__inner">
                     <div className="si__contact__icon">
@@ -159,15 +90,9 @@ export default function ZoneContactPage({ params }: Props) {
                       </svg>
                     </div>
                     <div className="si__contact__number">
-                      <span>ED Email</span>
+                      <span>Email</span>
                       <h6>
-                        {loading ? (
-                          <span className="shimmer-placeholder" style={{ display: 'inline-block', width: '120px', height: '16px', background: '#e0e0e0', borderRadius: '4px' }} />
-                        ) : edDetails?.email ? (
-                          <a href={`mailto:${edDetails.email}`}>{edDetails.email}</a>
-                        ) : (
-                          <a href="mailto:altronindia@gmail.com">altronindia@gmail.com</a>
-                        )}
+                        <a href="mailto:care@gripforum.com">care@gripforum.com</a>
                       </h6>
                     </div>
                   </div>
@@ -274,9 +199,7 @@ export default function ZoneContactPage({ params }: Props) {
               </form>
             </div>
             <div className="col-lg-4">
-              <div
-                className="si__contact__thumb"
-              >
+              <div className="si__contact__thumb">
                 <img src="/assets/images/grip/contanct.png" alt="" />
               </div>
             </div>
@@ -289,15 +212,15 @@ export default function ZoneContactPage({ params }: Props) {
       <style>{`
         .si__contact__mine {
           display: grid !important;
-          grid-template-columns: repeat(4, 1fr) !important;
+          grid-template-columns: repeat(3, 1fr) !important;
           gap: 20px !important;
         }
-        @media (max-width: 1200px) {
+        @media (max-width: 992px) {
           .si__contact__mine {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(3, 1fr) !important;
           }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .si__contact__mine {
             grid-template-columns: 1fr !important;
           }
@@ -376,17 +299,8 @@ export default function ZoneContactPage({ params }: Props) {
           font-weight: 600 !important;
           word-break: break-all !important;
         }
-
-        @keyframes shimmer {
-          0% { background-position: -200px 0; }
-          100% { background-position: 200px 0; }
-        }
-        .shimmer-placeholder {
-          background: linear-gradient(90deg, #ececec 25%, #f5f5f5 50%, #ececec 75%);
-          background-size: 200px 100%;
-          animation: shimmer 1.5s infinite;
-        }
       `}</style>
     </>
   );
 }
+
