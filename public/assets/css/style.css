@@ -1554,19 +1554,9 @@ ul li {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#loading-center {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-#loading-center-absolute {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -1574,7 +1564,8 @@ ul li {
 }
 
 .preloader__bar {
-  width: 270px;
+  width: 100%;
+  max-width: 240px;
   height: 4px;
   background-color: #E2E2E8;
   margin: auto;
@@ -1602,10 +1593,18 @@ ul li {
 
 .preloader__logo {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .preloader__logo img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 180px;
+  max-height: 90px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
 .preloader__logo img.logo-blink {

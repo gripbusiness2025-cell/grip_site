@@ -150,14 +150,14 @@ a.meanmenu-reveal{display:none}
   background: #fff;
 }
 .mean-container .mean-bar::before {
-	color: #c02221;
-	/* content: "GRIP"; */
-	font-size: 22px;
-	font-weight: 800;
-	left: 10px;
+	content: "";
+	display: block;
+	width: 120px;
+	height: 40px;
+	left: 15px;
 	position: absolute;
-	top: 5px;
-  content: url(../images/logo/logo.png)
+	top: 10px;
+	background: url('../images/logo/gripbg.png') no-repeat left center / contain;
 }
 .si__mobilemenu__area {
   display: none;
