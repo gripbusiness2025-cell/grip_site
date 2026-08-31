@@ -153,21 +153,14 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
                             </ul>
                           </li>
                           <li>
-                            <Link
-                              href="#"
-                              className={isActive("/franchising", "/franchise-partners")}
-                            >
-                              Franchise{" "}
-                              <i className="fa-light fa-chevron-down"></i>
+                            <Link href="/franchise-partners" className={isActive("/franchise-partners")}>
+                              Franchise Partners
                             </Link>
-                            <ul className="sub__menu">
-                              <li className={isActive("/franchise-partners") ? "current__item" : ""}>
-                                <Link href="/franchise-partners">Franchise Partners</Link>
-                              </li>
-                              <li className={isActive("/franchising") ? "current__item" : ""}>
-                                <Link href="/franchising">GRIP Franchising</Link>
-                              </li>
-                            </ul>
+                          </li>
+                          <li>
+                            <Link href="/franchising" className={isActive("/franchising")}>
+                              Franchising
+                            </Link>
                           </li>
                           <li>
                             <Link href="#" className={isActive("/upcoming-events")}>
@@ -325,16 +318,11 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
                       </li>
                     </ul>
                   </li>
-                  <li>
-                    <a href="#">Franchise</a>
-                    <ul className="sub__menu">
-                      <li>
-                        <Link href="/franchise-partners">Franchise Partners</Link>
-                      </li>
-                      <li>
-                        <Link href="/franchising">GRIP Franchising</Link>
-                      </li>
-                    </ul>
+                  <li className={isActive("/franchise-partners") ? "current__item" : ""}>
+                    <Link href="/franchise-partners">Franchise Partners</Link>
+                  </li>
+                  <li className={isActive("/franchising") ? "current__item" : ""}>
+                    <Link href="/franchising">Franchising</Link>
                   </li>
                   <li>
                     <a href="#">Events</a>

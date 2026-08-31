@@ -31,7 +31,19 @@ interface Member {
   profileLink?: string | null;
 }
 
-function MemberCard({ member, showRoleTop = false, profileLink }: { member: Member; showRoleTop?: boolean; profileLink?: string }) {
+function MemberCard({
+  member,
+  showRoleTop = false,
+  profileLink,
+  chapterName = "",
+  zoneName = ""
+}: {
+  member: Member;
+  showRoleTop?: boolean;
+  profileLink?: string;
+  chapterName?: string;
+  zoneName?: string;
+}) {
   const name    = member.name || "—";
   const role    = member.chapterRole || member.role || "";
   const company = member.company || "";
@@ -40,9 +52,11 @@ function MemberCard({ member, showRoleTop = false, profileLink }: { member: Memb
   const hasPhoto = !!member.photo;
 
   const rawLink = (profileLink || member.profileLink || "").trim();
-  const hrefUrl = rawLink
+  const websiteUrl = rawLink
     ? (/^https?:\/\//i.test(rawLink) ? rawLink : `https://${rawLink}`)
-    : null;
+    : "";
+
+  const hrefUrl = `/member/${member._id}?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&role=${encodeURIComponent(role)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&photo=${encodeURIComponent(member.photo || "")}&chapter=${encodeURIComponent(chapterName)}&zone=${encodeURIComponent(zoneName)}&website=${encodeURIComponent(websiteUrl)}`;
 
   const initials = name
     .split(" ")
@@ -87,30 +101,48 @@ function MemberCard({ member, showRoleTop = false, profileLink }: { member: Memb
             {phone && <a href={`tel:${phone}`}    title={phone}><i className="fa-solid fa-phone" /></a>}
             {email && <a href={`mailto:${email}`} title={email}><i className="fa-solid fa-envelope" /></a>}
           </div>
-          {hrefUrl && (
-            <a
-              href={hrefUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="chapter-view-profile"
-            >
-              View Profile <i className="fa-solid fa-chevron-right" style={{ fontSize: "10px" }} />
-            </a>
-          )}
+          <a
+            href={hrefUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="chapter-view-profile"
+          >
+            View Profile <i className="fa-solid fa-chevron-right" style={{ fontSize: "10px" }} />
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
-function RoleGroup({ title, members, memberLinks = {} }: { title: string; members: Member[]; memberLinks?: Record<string, string> }) {
+function RoleGroup({
+  title,
+  members,
+  memberLinks = {},
+  chapterName = "",
+  zoneName = ""
+}: {
+  title: string;
+  members: Member[];
+  memberLinks?: Record<string, string>;
+  chapterName?: string;
+  zoneName?: string;
+}) {
   if (!members.length) return null;
   return (
     <>
       <div className="chapter-leadership-header"><h3>{title}</h3></div>
       <div className="chapter-role-section">
         <div className="chapter-members-grid">
-          {members.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
+          {members.map((m) => (
+            <MemberCard
+              key={m._id}
+              member={m}
+              profileLink={memberLinks[m._id]}
+              chapterName={chapterName}
+              zoneName={zoneName}
+            />
+          ))}
         </div>
       </div>
     </>
@@ -344,13 +376,40 @@ export default function ChapterDetail({
             {headTeam.length > 0 && (
               <div className="chapter-role-section">
                 <div className="chapter-members-grid chapter-members-grid--leadership">
-                  {headTeam.map((m) => <MemberCard key={m._id} member={m} showRoleTop profileLink={memberLinks[m._id]} />)}
+                  {headTeam.map((m) => (
+                    <MemberCard
+                      key={m._id}
+                      member={m}
+                      showRoleTop
+                      profileLink={memberLinks[m._id]}
+                      chapterName={chapterTitle}
+                      zoneName={zoneTitle}
+                    />
+                  ))}
                 </div>
               </div>
             )}
-            <RoleGroup title="Visitor Interaction Team" members={visitorTeam} memberLinks={memberLinks} />
-            <RoleGroup title="Associate Committee" members={assocCom} memberLinks={memberLinks} />
-            <RoleGroup title="Coordinator Team" members={coordTeam} memberLinks={memberLinks} />
+            <RoleGroup
+              title="Visitor Interaction Team"
+              members={visitorTeam}
+              memberLinks={memberLinks}
+              chapterName={chapterTitle}
+              zoneName={zoneTitle}
+            />
+            <RoleGroup
+              title="Associate Committee"
+              members={assocCom}
+              memberLinks={memberLinks}
+              chapterName={chapterTitle}
+              zoneName={zoneTitle}
+            />
+            <RoleGroup
+              title="Coordinator Team"
+              members={coordTeam}
+              memberLinks={memberLinks}
+              chapterName={chapterTitle}
+              zoneName={zoneTitle}
+            />
           </div>
         </section>
       )}
@@ -362,7 +421,15 @@ export default function ChapterDetail({
             <div className="chapter-leadership-header"><h3>Chapter Associates</h3></div>
             <div className="chapter-role-section">
               <div className="chapter-members-grid">
-                {allAssociates.map((m) => <MemberCard key={m._id} member={m} profileLink={memberLinks[m._id]} />)}
+                {allAssociates.map((m) => (
+                  <MemberCard
+                    key={m._id}
+                    member={m}
+                    profileLink={memberLinks[m._id]}
+                    chapterName={chapterTitle}
+                    zoneName={zoneTitle}
+                  />
+                ))}
               </div>
             </div>
           </div>
