@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const subNavLinks = [
   { href: "/about", label: "About GRIP" },
-  { href: "/founders", label: "Founders" },
+  { href: "/founder", label: "Founder" },
   { href: "/founding-executive-directors", label: "Founding Executive Directors" },
   { href: "/careers", label: "Careers" },
   { href: "/policies", label: "Policies" },

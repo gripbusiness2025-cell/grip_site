@@ -4,12 +4,12 @@ import Footer from "@/components/Footer";
 import SubNav from "@/components/SubNav";
 
 export const metadata: Metadata = {
-  title: "GRIP Founders – Meet the Visionaries Behind Global Referral Interacting Platform",
+  title: "GRIP Founder – Meet the Visionary Behind Global Referral Interacting Platform",
   description:
     "Meet R. Pratheep Gandhi, Founder & CEO of GRIP – a peak performance business coach and life strategist driving ethical collaboration, innovation, and professional growth.",
 };
 
-export default function Founders() {
+export default function Founder() {
   return (
     <>
       <Header />
@@ -18,7 +18,7 @@ export default function Founders() {
       <div className="pt-60">
         <div className="container">
           <h2>
-            <span style={{ color: "#d23b3b" }}>GRIP Founders</span>
+            <span style={{ color: "#d23b3b" }}>GRIP Founder</span>
           </h2>
         </div>
       </div>

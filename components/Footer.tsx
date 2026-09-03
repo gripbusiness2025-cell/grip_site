@@ -63,7 +63,7 @@ export default function Footer() {
                     <Link href="/about">About GRIP</Link>
                   </li>
                   <li>
-                    <Link href="/founders">GRIP Founders</Link>
+                    <Link href="/founder">GRIP Founder</Link>
                   </li>
                   <li>
                     <Link href="/head-legal-training">
