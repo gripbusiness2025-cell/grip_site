@@ -24,11 +24,12 @@ a.meanmenu-reveal{display:none}
   float: left;
   font-size: 14px;
   margin: 0;
-  padding: 1em 5%;
+  padding: 12px 20px;
   text-align: left;
   text-decoration: none;
   text-transform: uppercase;
-  width: 90%;
+  width: 100%;
+  box-sizing: border-box;
   font-weight: 600;
 }
 .mean-container .mean-nav ul{padding:0;margin:0;width:100%;list-style-type:none}
@@ -46,11 +47,12 @@ a.meanmenu-reveal{display:none}
 	float: left;
 	font-size: 14px;
 	margin: 0;
-	padding: 1em 5%;
+	padding: 12px 20px;
 	text-align: left;
 	text-decoration: none;
 	text-transform: uppercase;
-	width: 90%;
+	width: 100%;
+	box-sizing: border-box;
 	font-weight: 600;
 }
 .mobile-menu-area {
@@ -124,6 +126,9 @@ a.meanmenu-reveal{display:none}
   background: #fff;
   color: #444;
   display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 20px;
 }
 .mean-container .mean-nav ul li a.mean-expand {
   background: none;
@@ -157,7 +162,7 @@ a.meanmenu-reveal{display:none}
 	left: 15px;
 	position: absolute;
 	top: 10px;
-	background: url('../images/logo/gripbg.png') no-repeat left center / contain;
+	background: url('../../griplogo.png') no-repeat left center / contain;
 }
 .si__mobilemenu__area {
   display: none;

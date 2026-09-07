@@ -54,20 +54,25 @@ const members = [
     ],
   },
   {
-    name: "L. Kamalakannan",
+    name: "N. Mahalakshmi",
     title: "Founding Executive Director",
-    image: "https://gripforum.com/assets/images/grip/kamal.jpeg",
+    image: "/assets/images/grip/mahalakshmi.jpeg",
     bio: [
-      "I've built my journey on self-motivation, a helping mindset, and the belief that true growth happens when we lift others alongside us. To me, \"giving is the only way to earn\" — whether it's sharing ideas, opportunities, or experiences. I look forward to connecting with like-minded individuals and fostering a spirit of collaboration and mutual upliftment.",
+      "N. Mahalakshmi plays a key role in expanding the organization's presence by building strategic partnerships and creating new business opportunities. With her extensive experience in business development and relationship management, she serves as a bridge between GRIP, entrepreneurs, investors, and business leaders.",
+      "Her expertise lies in identifying growth opportunities, fostering meaningful business relationships, and supporting aspiring entrepreneurs in becoming successful franchise partners. Through her leadership and professional guidance, she contributes to strengthening the GRIP brand and expanding its reach across new markets.",
+      "Committed to collaboration, innovation, and sustainable growth, she works towards creating a strong network of business leaders who share GRIP's vision of empowering businesses through trust-based networking and professional excellence.",
     ],
-    strengths: [
-      { label: "Purpose-Driven Leadership", text: "Believes in leadership where empathy and vision walk hand in hand." },
-      { label: "Strategy & Human Values", text: "Bridges strategy with human values, creating ecosystems that empower people and communities." },
-      { label: "Talent Nurturing", text: "Thrives on nurturing talent and encouraging personal growth, especially among emerging changemakers." },
-      { label: "Idea to Impact", text: "Passionate about translating big ideas into tangible impact, while staying grounded in cultural roots and shared values." },
-      { label: "Integrity & Inclusivity", text: "Integrity and inclusivity are the compass guiding every decision." },
-      { label: "Servant Leadership", text: "Sees leadership not as a position, but as a responsibility to serve, mentor, and inspire." },
+    strengths: [],
+    specializations: [
+      "Franchise Development & Expansion",
+      "Strategic Partnerships",
+      "Business Development",
+      "Investor & Entrepreneur Relations",
+      "Networking & Relationship Building",
+      "Market Growth Strategies",
+      "Business Community Development"
     ],
+    motto: `"Creating Opportunities • Building Partnerships • Driving Growth"`,
     highlights: [],
   },
 ];
@@ -128,7 +133,7 @@ export default function FoundingExecutiveDirectors() {
                   <p key={i} style={{ color: "#444", lineHeight: "1.75", marginBottom: "16px" }}>{para}</p>
                 ))}
 
-                {member.strengths.length > 0 && (
+                {member.strengths && member.strengths.length > 0 && (
                   <>
                     <p style={{ fontWeight: 700, color: "#222", marginBottom: "10px", marginTop: "8px" }}>Key Strengths</p>
                     <ul style={{ paddingLeft: "0", listStyle: "none", marginBottom: "16px" }}>
@@ -141,7 +146,25 @@ export default function FoundingExecutiveDirectors() {
                   </>
                 )}
 
-                {member.highlights.length > 0 && (
+                {(member as any).specializations && (member as any).specializations.length > 0 && (
+                  <>
+                    <p style={{ fontWeight: 700, color: "#222", marginBottom: "10px", marginTop: "8px" }}>Key Specializations</p>
+                    <ul style={{ paddingLeft: "20px", marginBottom: "16px" }}>
+                      {(member as any).specializations.map((s: string, i: number) => (
+                        <li key={i} style={{ marginBottom: "8px", color: "#444", lineHeight: "1.65" }}>{s}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {(member as any).motto && (
+                  <>
+                    <p style={{ fontWeight: 700, color: "#222", marginBottom: "10px", marginTop: "8px" }}>Motto</p>
+                    <p style={{ fontStyle: "italic", color: "#444", lineHeight: "1.65", marginBottom: "16px", fontSize: "16px" }}>{(member as any).motto}</p>
+                  </>
+                )}
+
+                {member.highlights && member.highlights.length > 0 && (
                   <>
                     <p style={{ fontWeight: 700, color: "#222", marginBottom: "10px" }}>Career Highlights</p>
                     <ul style={{ paddingLeft: "20px", marginBottom: "0" }}>

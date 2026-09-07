@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 interface MemberProfile {
   _id: string;
@@ -105,6 +107,7 @@ export default function MemberProfilePage() {
 
   return (
     <>
+      <Header />
       <div className="mp-page">
         {loading && (
           <div className="mp-loading">
@@ -252,6 +255,7 @@ export default function MemberProfilePage() {
           </>
         )}
       </div>
+      <Footer />
 
       <style>{`
         /* ── Layout ── */

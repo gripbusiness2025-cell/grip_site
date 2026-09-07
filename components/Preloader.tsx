@@ -44,9 +44,9 @@ export default function Preloader() {
         <div id="loading-center-absolute" style={{ width: "90%", maxWidth: "320px" }}>
           <div className="preloader__content text-center">
             <div className="preloader__logo">
-              <img
-                src="/assets/images/logo/gripbg.png?v=1"
-                alt="GRIP – The Business Forum"
+                <img
+                  src="/assets/griplogo.png"
+                  alt="GRIP – The Business Forum"
                 className="logo-blink"
                 style={{ maxWidth: "180px", width: "100%", height: "auto", display: "block", margin: "0 auto", objectFit: "contain" }}
               />
