@@ -132,10 +132,6 @@ export default function ZoneEventsPage({ params }: Props) {
                   ? `${IMAGE_URL}/${event.image.docPath}/${event.image.docName}`
                   : "/assets/images/grip/blog2.png";
 
-                const chapters = event.chapterId
-                  ? event.chapterId.map((c) => c.chapterName).join(", ")
-                  : "";
-
                 return (
                   <div
                     key={event._id}
@@ -154,12 +150,6 @@ export default function ZoneEventsPage({ params }: Props) {
                       </div>
                       <div className="si__our__blog__inner" style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
                         <div className="si__our__blog__content" style={{ flexGrow: 1 }}>
-                          <span
-                            className="badge bg-danger text-white mb-2"
-                            style={{ fontSize: "12px", padding: "6px 12px", textTransform: "uppercase" }}
-                          >
-                            {chapters || "Event"}
-                          </span>
                           <h4 style={{ margin: "10px 0 15px 0", fontWeight: "bold" }}>
                             {event.topic}
                           </h4>

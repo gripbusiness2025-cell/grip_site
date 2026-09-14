@@ -66,17 +66,9 @@ export default function Footer() {
                     <Link href="/founder">GRIP Founder</Link>
                   </li>
                   <li>
-                    <Link href="/head-legal-training">
-                      GRIP Head - Legal &amp; Training
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/founding-executive-directors">
                       Founding Executive Directors
                     </Link>
-                  </li>
-                  <li>
-                    <a href="#">GRIP Regional Directors</a>
                   </li>
                   <li>
                     <Link href="/careers">Careers</Link>
@@ -100,13 +92,16 @@ export default function Footer() {
                   <li>
                     <Link href="/policies">GRIP Policies</Link>
                   </li>
+                  <li>
+                    <Link href="/franchise-partners">Franchise Partners</Link>
+                  </li>
+                  <li>
+                    <Link href="/franchising">Franchising</Link>
+                  </li>
+                  <li>
+                    <Link href="/contact">Contact</Link>
+                  </li>
                 </ul>
-                <h6>
-                  <Link href="/franchising">GRIP Franchising</Link>
-                </h6>
-                <h6>
-                  <Link href="/contact">Contact</Link>
-                </h6>
               </div>
             </div>
           </div>
