@@ -17,11 +17,11 @@ const FALLBACK_EVENTS: WebsiteEventCard[] = [
     imageUrl: "/assets/images/grip/blog2.png",
   },
   {
-    _id: "fallback-virutcham",
-    title: "GRIP Virutcham - Launch",
+    _id: "fallback-nexus-chennai-west",
+    title: "GRIP Nexus Chennai West – Baseline Meeting",
     description:
-      "A platform to nurture business growth through strong referral roots.",
-    imageUrl: "/assets/images/grip/launch.jpg",
+      "Organization: GRIP – The Business Forum\nChapter: GRIP Nexus Chennai West\nType: Hybrid Chapter – Baseline Meeting\nDate: 16 September 2026 (Wednesday)\nTime: 8:00 AM – 9:00 AM\nMode: Zoom\nMeeting: Free",
+    imageUrl: "https://res.cloudinary.com/dq6gr5zjc/image/upload/v1789357145/WhatsApp_Image_2026-09-14_at_8.58.58_AM_mrcedc.jpg",
   },
 ];
 
@@ -42,12 +42,23 @@ export async function fetchWebsiteEvents(): Promise<WebsiteEventCard[]> {
       const json = await res.json();
       const list = Array.isArray(json?.data) ? json.data : [];
       if (list.length > 0) {
-        return list.map((e: any) => ({
-          _id: String(e._id),
-          title: e.title || "",
-          description: e.description || "",
-          imageUrl: buildImageUrl(e.image, PROD_IMG),
-        }));
+        return list.map((e: any) => {
+          if (e.title?.toLowerCase().includes("virutcham")) {
+            return {
+              _id: String(e._id),
+              title: "GRIP Nexus Chennai West – Baseline Meeting",
+              description:
+                "Organization: GRIP – The Business Forum\nChapter: GRIP Nexus Chennai West\nType: Hybrid Chapter – Baseline Meeting\nDate: 16 September 2026 (Wednesday)\nTime: 8:00 AM – 9:00 AM\nMode: Zoom\nMeeting: Free",
+              imageUrl: "https://res.cloudinary.com/dq6gr5zjc/image/upload/v1789357145/WhatsApp_Image_2026-09-14_at_8.58.58_AM_mrcedc.jpg",
+            };
+          }
+          return {
+            _id: String(e._id),
+            title: e.title || "",
+            description: e.description || "",
+            imageUrl: buildImageUrl(e.image, PROD_IMG),
+          };
+        });
       }
     }
   } catch {
