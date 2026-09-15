@@ -429,7 +429,7 @@ export default async function Home() {
                       <a className="si__our__blog__content__text" href="/upcoming-events">
                         {event.title}
                       </a>
-                      <p>{event.description}</p>
+                      <p style={{ whiteSpace: "pre-line" }}>{event.description}</p>
                     </div>
                   </div>
                 </div>
