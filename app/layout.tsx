@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "https://gripforum.com/assets/images/logo/logo-grip.jpg" }],
   },
+  verification: {
+    google: "sSX4guOTj4uhXok61FgRXlN2MoyH6wZGgXFvX-gi7GQ",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +35,7 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="sSX4guOTj4uhXok61FgRXlN2MoyH6wZGgXFvX-gi7GQ" />
         <link rel="icon" type="image/jpeg" href="/assets/images/logo/logo-grip.jpg" />
         <link rel="shortcut icon" href="/assets/images/logo/logo-grip.jpg" />
         {/* Preload above-the-fold images */}
