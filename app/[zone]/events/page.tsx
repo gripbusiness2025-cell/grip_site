@@ -135,32 +135,41 @@ export default function ZoneEventsPage({ params }: Props) {
                 return (
                   <div
                     key={event._id}
-                    className="col-lg-6 col-md-6 wow fadeInUp animated"
+                    className="col-12 wow fadeInUp animated mb-4"
                     data-wow-delay={`${0.2 * idx + 0.3}s`}
                   >
-                    <div className="si__our__blog__box mb-30" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                      <div className="si__our__blog__thumb">
-                        <div className="si__our__blog__thumb__inner">
+                    <div className="card border-0 shadow-sm" style={{ borderRadius: "16px", overflow: "hidden", backgroundColor: "#fff" }}>
+                      <div className="row g-0">
+                        <div className="col-md-5 col-lg-4 d-flex align-items-center justify-content-center bg-light" style={{ padding: "20px" }}>
                           <img
                             src={imgUrl}
                             alt={event.topic}
-                            style={{ width: "100%", height: "260px", objectFit: "cover" }}
+                            className="img-fluid rounded"
+                            style={{ width: "100%", height: "auto", maxHeight: "350px", objectFit: "contain" }}
                           />
                         </div>
-                      </div>
-                      <div className="si__our__blog__inner" style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-                        <div className="si__our__blog__content" style={{ flexGrow: 1 }}>
-                          <h4 style={{ margin: "10px 0 15px 0", fontWeight: "bold" }}>
-                            {event.topic}
-                          </h4>
-                          <p className="text-muted mb-2 d-flex align-items-center gap-2" style={{ fontSize: "14px" }}>
-                            <i className="fa-regular fa-calendar-days text-danger"></i>
-                            {formatDateRange(event.startDate, event.endDate)}
-                          </p>
-                          <p className="text-muted d-flex align-items-center gap-2" style={{ fontSize: "14px" }}>
-                            <i className="fa-regular fa-location-dot text-danger"></i>
-                            {event.address}
-                          </p>
+                        <div className="col-md-7 col-lg-8 d-flex align-items-center">
+                          <div className="card-body p-4 p-md-5">
+                            <h3 className="card-title fw-bold mb-4" style={{ color: "#1a1a1a", fontSize: "1.75rem" }}>
+                              {event.topic}
+                            </h3>
+                            <div className="d-flex flex-column gap-3">
+                              <div className="d-flex align-items-start gap-3">
+                                <i className="fa-regular fa-calendar-days text-danger mt-1" style={{ fontSize: "1.5rem" }}></i>
+                                <div>
+                                  <h6 className="mb-1 fw-bold text-muted text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px" }}>Date &amp; Time</h6>
+                                  <span style={{ fontSize: "1.1rem", color: "#444" }}>{formatDateRange(event.startDate, event.endDate)}</span>
+                                </div>
+                              </div>
+                              <div className="d-flex align-items-start gap-3">
+                                <i className="fa-regular fa-location-dot text-danger mt-1" style={{ fontSize: "1.5rem" }}></i>
+                                <div>
+                                  <h6 className="mb-1 fw-bold text-muted text-uppercase" style={{ fontSize: "0.85rem", letterSpacing: "1px" }}>Location</h6>
+                                  <span style={{ fontSize: "1.1rem", color: "#444" }}>{event.address}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
