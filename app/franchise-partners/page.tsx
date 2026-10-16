@@ -62,6 +62,7 @@ export default function FranchisePartnersPage() {
       <Breadcrumb
         title="Franchise Partners"
         backgroundImage="/assets/images/grip/chapter2.jpg"
+        backgroundAlt="Presenter addressing an applauding team in a meeting room – GRIP franchise partners"
       />
 
       <section className="pb-120 pt-90">

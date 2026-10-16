@@ -13,6 +13,19 @@ const nextConfig: NextConfig = {
       process.env.NEXT_PUBLIC_IMAGE_URL || "https://api.gripforum.com/api/public",
     GRIP_API_TOKEN: process.env.GRIP_API_TOKEN || "",
   },
+  async headers() {
+    return [
+      {
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/xml",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

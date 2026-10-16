@@ -94,7 +94,7 @@ export default function Founder() {
             <div className="col-lg-5 text-center">
               <img
                 src="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264224/grip_founders_ra0aql.jpg"
-                alt="R. Pratheep Gandhi – Founder & CEO, GRIP"
+                alt="R. Pratheep Gandhi, Founder & CEO of GRIP – The Business Forum, at his office desk"
                 fetchPriority="high"
                 style={{ width: "100%", maxWidth: "420px", borderRadius: "20px", boxShadow: "0 12px 40px rgba(0,0,0,.18)", objectFit: "cover" }}
               />

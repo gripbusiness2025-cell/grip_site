@@ -6,6 +6,7 @@ export type WebsiteEventCard = {
   title: string;
   description: string;
   imageUrl: string | null;
+  imageAlt?: string;
 };
 
 export const BASELINE_MEETING_EVENT: WebsiteEventCard = {
@@ -15,6 +16,8 @@ export const BASELINE_MEETING_EVENT: WebsiteEventCard = {
     "Organization: GRIP – The Business Forum\nChapter: GRIP Nexus Chennai West\nType: Hybrid Chapter – Baseline Meeting\nDate: 16 September 2026 (Wednesday)\nTime: 8:00 AM – 9:00 AM\nMode: Zoom\nMeeting: Free",
   imageUrl:
     "https://res.cloudinary.com/dq6gr5zjc/image/upload/v1789357145/WhatsApp_Image_2026-09-14_at_8.58.58_AM_mrcedc.jpg",
+  imageAlt:
+    "GRIP Nexus Chennai West hybrid chapter baseline meeting poster – free Zoom meeting, 16 September 2026",
 };
 
 export const IGNITE_EVENT: WebsiteEventCard = {
@@ -24,6 +27,8 @@ export const IGNITE_EVENT: WebsiteEventCard = {
     "Organization: GRIP – The Business Forum\nChapter: GRIP Nexus – Chennai West\nEvent: IGNITE – Business Networking on Zoom\nMeeting: Baseline Meeting\nDate: 26th September 2026 (Saturday)\nTime: 8:00 AM – 9:00 AM\nMode: Online via Zoom\nMeeting Fee: Free\nChapter Type: Hybrid Chapter",
   imageUrl:
     "https://res.cloudinary.com/dq6gr5zjc/image/upload/v1789436668/3c1cecce-72d1-427f-806f-40fa309bfc65_x2ljqr.jpg",
+  imageAlt:
+    "GRIP Nexus Chennai West IGNITE business networking poster – free Zoom baseline meeting, 26 September 2026",
 };
 
 export const HORIZON_EVENT: WebsiteEventCard = {
@@ -33,6 +38,8 @@ export const HORIZON_EVENT: WebsiteEventCard = {
     "Organization: GRIP – The Business Forum\nEvent: HORIZON – Business Networking\nMeeting: Baseline Meet\nDate: October 2nd, 2026 (Friday)\nTime: 8:00 AM – 9:00 AM\nMode: Online via Zoom\nMeeting Fee: FREE\nChapter: Hybrid Chapter",
   imageUrl:
     "https://res.cloudinary.com/dq6gr5zjc/image/upload/v1789436636/889f2e51-1b5f-439a-8aeb-7be3ebdeb79c_a6kxcq.jpg",
+  imageAlt:
+    "GRIP Horizon business networking poster – free Zoom baseline meet, 2 October 2026",
 };
 
 const FALLBACK_EVENTS: WebsiteEventCard[] = [
@@ -45,6 +52,7 @@ const FALLBACK_EVENTS: WebsiteEventCard[] = [
     description:
       "An exclusive chapter for young entrepreneurs aged between 18 to 22 years",
     imageUrl: "/assets/images/grip/blog2.png",
+    imageAlt: "GRIP NEXOR - Launch poster",
   },
 ];
 
@@ -77,6 +85,7 @@ export async function fetchWebsiteEvents(): Promise<WebsiteEventCard[]> {
               title: e.title || "",
               description: e.description || "",
               imageUrl: buildImageUrl(e.image, PROD_IMG),
+              imageAlt: e.title ? `${e.title} poster` : "GRIP event poster",
             });
           }
         }

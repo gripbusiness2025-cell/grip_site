@@ -117,7 +117,7 @@ export default function ZoneEnquiry({ params }: Props) {
               <div
                 className="si__contact__thumb"
               >
-                <img src="/assets/images/grip/contanct.png" alt="" />
+                <img src="/assets/images/grip/contanct.png" alt="Team of four business professionals – enquire about becoming a GRIP associate" />
               </div>
             </div>
           </div>

@@ -200,7 +200,7 @@ export default function ZoneContactPage({ params }: Props) {
             </div>
             <div className="col-lg-4">
               <div className="si__contact__thumb">
-                <img src="/assets/images/grip/contanct.png" alt="" />
+                <img src="/assets/images/grip/contanct.png" alt="Team of four business professionals – contact GRIP Business Forum" />
               </div>
             </div>
           </div>

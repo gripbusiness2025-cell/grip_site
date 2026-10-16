@@ -13,6 +13,7 @@ const franchiseReasons = [
   {
     num: "01",
     icon: "/assets/images/services/1.png",
+    alt: "Gear icon – proven track record of the GRIP franchise model",
     title: "Proven Track Record",
     desc: "Scalable and profitable business model with consistent success.",
     reverse: false,
@@ -20,6 +21,7 @@ const franchiseReasons = [
   {
     num: "02",
     icon: "/assets/images/services/2.png",
+    alt: "Megaphone icon – strong GRIP brand value",
     title: "Strong Brand Value",
     desc: "Trusted by thousands across multiple regions.",
     reverse: true,
@@ -27,6 +29,7 @@ const franchiseReasons = [
   {
     num: "03",
     icon: "/assets/images/services/3.png",
+    alt: "Design icon – end-to-end franchise training and support",
     title: "End-to-End Support",
     desc: "Comprehensive training, marketing assistance, and operational guidance.",
     reverse: false,
@@ -34,6 +37,7 @@ const franchiseReasons = [
   {
     num: "04",
     icon: "/assets/images/services/2.png",
+    alt: "Megaphone icon – global franchise opportunities with GRIP",
     title: "Global Opportunities",
     desc: "Expand with GRIP into emerging and mature markets worldwide.",
     reverse: true,
@@ -41,6 +45,7 @@ const franchiseReasons = [
   {
     num: "05",
     icon: "/assets/images/services/3.png",
+    alt: "Design icon – innovation-driven franchise growth",
     title: "Innovation-Driven Growth",
     desc: "We adapt, evolve, and stay ahead of market trends.",
     reverse: false,
@@ -55,6 +60,8 @@ export default function Franchising() {
       {/* Hero Slider */}
       <section
         className="si__slider__four__area bg position-relative"
+        role="img"
+        aria-label="Two business partners shaking hands – GRIP franchising across India and beyond"
         style={{
           background:
             "url(/assets/images/grip/grip12.avif) center/cover no-repeat",
@@ -125,7 +132,7 @@ export default function Franchising() {
                           <div className="si__service__four__inner">
                             <div className="si__service__four__icon">
                               <a href="#">
-                                <img src={item.icon} alt="" />
+                                <img src={item.icon} alt={item.alt} />
                               </a>
                             </div>
                             <div className="si__service__four__content">
@@ -139,7 +146,7 @@ export default function Franchising() {
                           <div className="si__service__four__inner si__inner">
                             <div className="si__service__four__icon">
                               <a href="#">
-                                <img src={item.icon} alt="" />
+                                <img src={item.icon} alt={item.alt} />
                               </a>
                             </div>
                             <div className="si__service__four__content">
@@ -162,7 +169,7 @@ export default function Franchising() {
                 <img
                   className="si__service__four__thumb__two"
                   src="/assets/images/grip/grip1.png"
-                  alt="GRIP Franchising"
+                  alt="Business partners shaking hands in an office corridor – GRIP franchising opportunities in India"
                 />
               </div>
             </div>
@@ -223,7 +230,7 @@ export default function Franchising() {
             </div>
             <div className="col-lg-5">
               <div className="si__why__choose__four__thumb">
-                <img src="/assets/images/grip/grip.jpeg" alt="GRIP" />
+                <img src="/assets/images/grip/grip.jpeg" alt="Franchise partners in discussion at a meeting table – GRIP commitment to franchise partners" />
               </div>
             </div>
           </div>

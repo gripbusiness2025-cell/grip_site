@@ -22,7 +22,7 @@ export default function About() {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="si__why__choose__thumb reveal-left">
-                <img src="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" alt="About GRIP" fetchPriority="high" />
+                <img src="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" alt="Business professionals collaborating around a glowing digital globe – GRIP global referral networking platform" fetchPriority="high" />
               </div>
             </div>
             <div className="col-lg-6">
@@ -106,7 +106,7 @@ export default function About() {
               <div className="si__work__process__box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon1.svg" alt="" />
+                    <img src="/assets/images/work-process/icon1.svg" alt="Idea and cloud icon – digital support and weekly networking meetings" />
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default function About() {
               <div className="si__work__process__box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon2.svg" alt="" />
+                    <img src="/assets/images/work-process/icon2.svg" alt="Analytics icon – thought leadership insights from industry experts" />
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function About() {
               <div className="si__work__process__box last-box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon3.svg" alt="" />
+                    <img src="/assets/images/work-process/icon3.svg" alt="Target and checklist icon – cross-industry business collaboration" />
                   </div>
                 </div>
               </div>

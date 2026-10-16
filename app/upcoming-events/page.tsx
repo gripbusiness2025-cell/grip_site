@@ -54,7 +54,7 @@ export default async function UpcomingEvents() {
                       <div className="si__our__blog__thumb__inner">
                         <img
                           src={event.imageUrl || "/assets/images/grip/blog2.png"}
-                          alt={event.title}
+                          alt={event.imageAlt || `${event.title} poster`}
                         />
                       </div>
                     </div>

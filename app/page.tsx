@@ -23,6 +23,8 @@ export default async function Home() {
       {/* Slider Area */}
       <section
         className="si__slider__area bg"
+        role="img"
+        aria-label="Business team in a meeting – GRIP, India's 1st digital business networking platform"
         style={{ background: "url(/assets/images/slider/banner.jpeg)" }}
       >
         <div className="container">
@@ -48,7 +50,7 @@ export default async function Home() {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="si__why__choose__thumb reveal-left">
-                <img src="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" alt="About GRIP" fetchPriority="high" />
+                <img src="https://res.cloudinary.com/dq6gr5zjc/image/upload/v1784264144/about_udd7zm.jpg" alt="Business professionals collaborating around a glowing digital globe – GRIP global referral networking platform" fetchPriority="high" />
               </div>
             </div>
             <div className="col-lg-6">
@@ -126,7 +128,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/smart-home.png" alt="" />
+                    <img src="/assets/images/grip/smart-home.png" alt="Mobile app icon – GRIP digital-first networking app for Android and iOS" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Digital First</h5>
@@ -145,7 +147,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/meeting.png" alt="" />
+                    <img src="/assets/images/grip/meeting.png" alt="Group discussion icon – regular offline training for GRIP associates" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Regular Offline Training</h5>
@@ -164,7 +166,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/presentation.png" alt="" />
+                    <img src="/assets/images/grip/presentation.png" alt="Presentation icon – paperless attendance and freedom from manual work" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Freedom from Manual Work</h5>
@@ -184,7 +186,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/value.png" alt="" />
+                    <img src="/assets/images/grip/value.png" alt="Diamond and team icon – dedicated mentor for every GRIP chapter" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Chapter Mentor</h5>
@@ -203,7 +205,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/seminar.png" alt="" />
+                    <img src="/assets/images/grip/seminar.png" alt="Seminar icon – valued GRIP associates and leadership team" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Valued Associates</h5>
@@ -222,7 +224,7 @@ export default async function Home() {
               <div className="si__service__three__box text-center">
                 <div className="si__service__three__inner" style={{ height: "376px" }}>
                   <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/meeting.png" alt="" />
+                    <img src="/assets/images/grip/meeting.png" alt="Business page icon – dedicated digital business page for GRIP associates" />
                   </div>
                   <div className="si__service__three__text">
                     <h5>Your Dedicated Business Page</h5>
@@ -290,16 +292,18 @@ export default async function Home() {
             </div>
             <div className="col-lg-6">
               <div className="si__faq__thumb reveal-left">
-                <img src="/assets/images/grip/chhose.png" alt="" />
+                <img src="/assets/images/grip/chhose.png" alt="Three business professionals working together at a laptop – why choose GRIP business networking" />
                 <img
                   className="si__faq__thumb__shape1 dance"
                   src="/assets/images/faq/1.png"
                   alt=""
+                  aria-hidden="true"
                 />
                 <img
                   className="si__faq__thumb__shape2 scale2"
                   src="/assets/images/faq/2.png"
                   alt=""
+                  aria-hidden="true"
                 />
               </div>
             </div>
@@ -380,7 +384,7 @@ export default async function Home() {
             <div className="col-lg-7">
               <div className="si__our__features__thumb reveal-left">
                 <div className="si__our__features__thumb__img">
-                  <img src="/assets/images/grip/b4.jpeg" alt="" />
+                  <img src="/assets/images/grip/b4.jpeg" alt="Business professionals networking around a meeting table – connect, collaborate and grow with GRIP" />
                 </div>
               </div>
             </div>
@@ -420,7 +424,7 @@ export default async function Home() {
                     <div className="si__our__blog__thumb__inner">
                       <img
                         src={event.imageUrl || "/assets/images/grip/blog2.png"}
-                        alt={event.title}
+                        alt={event.imageAlt || `${event.title} poster`}
                       />
                     </div>
                   </div>

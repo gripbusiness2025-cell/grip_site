@@ -46,7 +46,7 @@ export default function Preloader() {
             <div className="preloader__logo">
                 <img
                   src="/assets/griplogo.png"
-                  alt="GRIP – The Business Forum"
+                  alt="GRIP – The Business Forum logo"
                 className="logo-blink"
                 style={{ maxWidth: "180px", width: "100%", height: "auto", display: "block", margin: "0 auto", objectFit: "contain" }}
               />

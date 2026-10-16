@@ -3,9 +3,10 @@ import Link from "next/link";
 interface BreadcrumbProps {
   title: string;
   backgroundImage?: string;
+  backgroundAlt?: string;
 }
 
-export default function Breadcrumb({ title, backgroundImage }: BreadcrumbProps) {
+export default function Breadcrumb({ title, backgroundImage, backgroundAlt }: BreadcrumbProps) {
   const bg = backgroundImage || "/assets/images/breadcumb/Hero.png";
   const isCustom = Boolean(backgroundImage);
 
@@ -13,6 +14,8 @@ export default function Breadcrumb({ title, backgroundImage }: BreadcrumbProps) 
     <>
       <section
         className={`si__breadcumb__area bg${isCustom ? " si__breadcumb__area--tall" : ""}`}
+        role={backgroundAlt ? "img" : undefined}
+        aria-label={backgroundAlt}
         style={{
           background: isCustom
             ? `linear-gradient(rgba(18, 18, 18, 0.55), rgba(18, 18, 18, 0.55)), url(${bg}) center/cover no-repeat`

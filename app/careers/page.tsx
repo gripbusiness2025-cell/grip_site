@@ -11,21 +11,25 @@ export const metadata: Metadata = {
 const benefits = [
   {
     img: "/assets/images/work-process/img1.png",
+    alt: "Collaborative culture at GRIP icon",
     title: "Collaborative Culture",
     desc: "We believe in the power of teamwork and shared success.",
   },
   {
     img: "/assets/images/work-process/img2.png",
+    alt: "Career growth opportunities at GRIP icon",
     title: "Growth Opportunities",
     desc: "Continuous learning and growth are our core values.",
   },
   {
     img: "/assets/images/work-process/img3.png",
+    alt: "Meaningful work at GRIP icon",
     title: "Meaningful Work",
     desc: "Be part of projects that make a difference.",
   },
   {
     img: "/assets/images/work-process/img3.png",
+    alt: "Dynamic work environment at GRIP icon",
     title: "Dynamic Environment",
     desc: "Where creativity, agility, and ideas thrive.",
   },
@@ -59,7 +63,7 @@ export default function Careers() {
                 <div className="si__work__process__three__box">
                   <div className="si__work__process__three__icon">
                     <div className="si__work__process__three__inner">
-                      <img src={item.img} alt={item.title} />
+                      <img src={item.img} alt={item.alt} />
                     </div>
                   </div>
                   <div className="si__work__process__three__text">
@@ -129,7 +133,7 @@ export default function Careers() {
                     </h6>
                   </div>
                   <div className="si__testimonial__two__box__inner__icon">
-                    <img src="/assets/images/testimonial/icon.png" alt="Icon" />
+                    <img src="/assets/images/testimonial/icon.png" alt="" aria-hidden="true" />
                   </div>
                 </div>
                 <div className="mt-3">

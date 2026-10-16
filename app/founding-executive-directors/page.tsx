@@ -108,7 +108,7 @@ export default function FoundingExecutiveDirectors() {
               <div className="col-lg-4 text-center">
                 <img
                   src={member.image}
-                  alt={`${member.name} – ${member.title}`}
+                  alt={`${member.name}, ${member.title} of GRIP – The Business Forum`}
                   style={{
                     width: "100%",
                     maxWidth: "340px",

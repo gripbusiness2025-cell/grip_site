@@ -115,7 +115,7 @@ export default function Enquiry() {
                 className="si__contact__thumb wow fadeInUp animated"
                 data-wow-delay=".75s"
               >
-                <img src="/assets/images/grip/contanct.png" alt="" />
+                <img src="/assets/images/grip/contanct.png" alt="Team of four business professionals – enquire about becoming a GRIP associate" />
               </div>
             </div>
           </div>

@@ -10,3 +10,8 @@
   NEXT_PUBLIC_PHP_BACKEND_URL = "https://api.gripforum.com"
   NEXT_PUBLIC_API_URL = "https://api.gripforum.com/api/admin"
   NEXT_PUBLIC_IMAGE_URL = "https://api.gripforum.com/api/public"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"

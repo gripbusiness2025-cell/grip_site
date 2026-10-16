@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="si__fotter__two__box">
                 <div className="si__fotter__two__box__icon">
                   <Link href="/">
-                    <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum" />
+                    <img src="/assets/images/logo/gripbg.png?v=1" alt="GRIP – The Business Forum logo" />
                   </Link>
                   <p>
                     GRIP - India&apos;s First Paperless Digital empowered referral
@@ -115,17 +115,17 @@ export default function Footer() {
         target="_blank"
         rel="noreferrer"
       >
-        <img src="/assets/images/playstore.png" alt="Play Store" className="w-75" />
+        <img src="/assets/images/playstore.png" alt="Download the GRIP app on Google Play" className="w-75" />
       </a>
 
       <a href="tel:9841012721" className="float-1" target="_blank" rel="noreferrer">
-        <img src="/assets/images/grip/call.png" alt="Call" className="w-75" />
+        <img src="/assets/images/grip/call.png" alt="Call GRIP Business Forum on +91 98410 12721" className="w-75" />
       </a>
 
       <a href="https://wa.me/919841012721" className="float" target="_blank" rel="noreferrer">
         <img
           src="/assets/images/grip/whatsapp.png"
-          alt="WhatsApp"
+          alt="Chat with GRIP Business Forum on WhatsApp"
           style={{ borderRadius: "21px" }}
           className="w-75"
         />
