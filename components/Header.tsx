@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 interface HeaderProps {
   menuType?: "standard" | "zone";
@@ -10,6 +11,19 @@ interface HeaderProps {
 
 export default function Header({ menuType = "standard", zoneSlug }: HeaderProps) {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [expandedSubmenu, setExpandedSubmenu] = useState<string | null>(null);
+
+  const toggleSubmenu = (name: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setExpandedSubmenu((prev) => (prev === name ? null : name));
+  };
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setExpandedSubmenu(null);
+  }, [pathname]);
 
   const isActive = (...paths: string[]) =>
     paths.some((p) => pathname === p || pathname.startsWith(p + "/"))
@@ -259,88 +273,214 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
         </div>
       </section>
 
-      {/* Mobile Menu */}
-      <section className="si__mobilemenu__area">
-        <div className="mobile-menu">
-          <nav className="si_menu">
+      {/* Mobile Header Bar & Responsive Dropdown Menu */}
+      <header className="grip__mobile__header">
+        <div className="grip__mobile__bar">
+          <Link
+            href={zoneSlug ? `/${zoneSlug}/home` : "/"}
+            className="grip__mobile__logo"
+            onClick={() => setMobileOpen(false)}
+          >
+            <img src="/assets/griplogo.png" alt="GRIP – The Business Forum logo" />
+          </Link>
+          <button
+            type="button"
+            className="grip__mobile__toggle"
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+          >
+            {mobileOpen ? (
+              <span className="grip__mobile__close">✕</span>
+            ) : (
+              <span className="grip__mobile__hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            )}
+          </button>
+        </div>
+
+        {mobileOpen && (
+          <nav className="grip__mobile__nav">
             <ul>
               {menuType === "zone" ? (
                 <>
-                  <li className={pathname === (zoneSlug ? `/${zoneSlug}/home` : "/") ? "current__item" : ""}>
-                    <Link href={zoneSlug ? `/${zoneSlug}/home` : "/"}>Home</Link>
+                  <li className={pathname === (zoneSlug ? `/${zoneSlug}/home` : "/") ? "active" : ""}>
+                    <Link href={zoneSlug ? `/${zoneSlug}/home` : "/"} onClick={() => setMobileOpen(false)}>
+                      Home
+                    </Link>
+                  </li>
+                  <li className={`has-submenu ${expandedSubmenu === "associate" ? "open" : ""}`}>
+                    <div className="grip__mobile__link-row">
+                      <Link
+                        href={zoneSlug ? `/${zoneSlug}/membership-policies` : "/membership-policies"}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Become a Associate
+                      </Link>
+                      <button
+                        type="button"
+                        className="grip__mobile__expand-btn"
+                        onClick={(e) => toggleSubmenu("associate", e)}
+                        aria-label="Toggle Associate submenu"
+                      >
+                        {expandedSubmenu === "associate" ? "−" : "+"}
+                      </button>
+                    </div>
+                    {expandedSubmenu === "associate" && (
+                      <ul className="grip__mobile__submenu">
+                        <li>
+                          <Link
+                            href={zoneSlug ? `/${zoneSlug}/membership-policies` : "/membership-policies"}
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            Associate Policies
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href={zoneSlug ? `/${zoneSlug}/enquiry` : "/enquiry"}
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            Become a Associate
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href={zoneSlug ? `/${zoneSlug}/faq` : "/faq"}
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            FAQ
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                  <li className={isActive(zoneSlug ? `/${zoneSlug}/events` : "/upcoming-events")}>
+                    <Link
+                      href={zoneSlug ? `/${zoneSlug}/events` : "/upcoming-events"}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Events
+                    </Link>
+                  </li>
+                  <li className={pathname === `/${zoneSlug}` ? "active" : ""}>
+                    <Link href={`/${zoneSlug || ""}`} onClick={() => setMobileOpen(false)}>
+                      Chapters
+                    </Link>
+                  </li>
+                  <li className={isActive(zoneSlug ? `/${zoneSlug}/contact` : "/contact")}>
+                    <Link
+                      href={zoneSlug ? `/${zoneSlug}/contact` : "/contact"}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Contact
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">Become a Associate</a>
-                    <ul className="sub__menu">
-                      <li>
-                        <Link href={zoneSlug ? `/${zoneSlug}/membership-policies` : "/membership-policies"}>Associate Policies</Link>
-                      </li>
-                      <li>
-                        <Link href={zoneSlug ? `/${zoneSlug}/enquiry` : "/enquiry"}>Become a Associate</Link>
-                      </li>
-                      <li>
-                        <Link href={zoneSlug ? `/${zoneSlug}/faq` : "/faq"}>FAQ</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link href={zoneSlug ? `/${zoneSlug}/events` : "/upcoming-events"}>Events</Link>
-                  </li>
-                  <li>
-                    <Link href={`/${zoneSlug || ""}`}>Chapters</Link>
-                  </li>
-                  <li>
-                    <Link href={zoneSlug ? `/${zoneSlug}/contact` : "/contact"}>Contact</Link>
-                  </li>
-                  <li>
-                    <a href="https://user.gripforum.com/" target="_blank" rel="noreferrer">Associates Login</a>
+                    <a
+                      href="https://user.gripforum.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Associates Login
+                    </a>
                   </li>
                 </>
               ) : (
                 <>
-                  <li className={pathname === "/" ? "current__item" : ""}>
-                    <Link href="/">Home</Link>
+                  <li className={pathname === "/" ? "active" : ""}>
+                    <Link href="/" onClick={() => setMobileOpen(false)}>
+                      Home
+                    </Link>
                   </li>
-                  <li>
-                    <Link href="/about">About GRIP</Link>
+                  <li className={isActive("/about")}>
+                    <Link href="/about" onClick={() => setMobileOpen(false)}>
+                      About GRIP
+                    </Link>
                   </li>
-                  <li>
-                    <a href="#">Become a Associate</a>
-                    <ul className="sub__menu">
-                      <li>
-                        <Link href="/membership-policies">Associate Policies</Link>
-                      </li>
-                      <li>
-                        <Link href="/enquiry">Become a Associate</Link>
-                      </li>
-                      <li>
-                        <Link href="/faq">FAQ</Link>
-                      </li>
-                    </ul>
+                  <li className={`has-submenu ${expandedSubmenu === "associate" ? "open" : ""}`}>
+                    <div className="grip__mobile__link-row">
+                      <Link href="/membership-policies" onClick={() => setMobileOpen(false)}>
+                        Become a Associate
+                      </Link>
+                      <button
+                        type="button"
+                        className="grip__mobile__expand-btn"
+                        onClick={(e) => toggleSubmenu("associate", e)}
+                        aria-label="Toggle Associate submenu"
+                      >
+                        {expandedSubmenu === "associate" ? "−" : "+"}
+                      </button>
+                    </div>
+                    {expandedSubmenu === "associate" && (
+                      <ul className="grip__mobile__submenu">
+                        <li>
+                          <Link href="/membership-policies" onClick={() => setMobileOpen(false)}>
+                            Associate Policies
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/enquiry" onClick={() => setMobileOpen(false)}>
+                            Become a Associate
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/faq" onClick={() => setMobileOpen(false)}>
+                            FAQ
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
                   </li>
-                  <li className={isActive("/franchise-partners") ? "current__item" : ""}>
-                    <Link href="/franchise-partners">Franchise Partners</Link>
+                  <li className={isActive("/franchise-partners")}>
+                    <Link href="/franchise-partners" onClick={() => setMobileOpen(false)}>
+                      Franchise Partners
+                    </Link>
                   </li>
-                  <li className={isActive("/franchising") ? "current__item" : ""}>
-                    <Link href="/franchising">Franchising</Link>
+                  <li className={isActive("/franchising")}>
+                    <Link href="/franchising" onClick={() => setMobileOpen(false)}>
+                      Franchising
+                    </Link>
                   </li>
-                  <li>
-                    <a href="#">Events</a>
-                    <ul className="sub__menu">
-                      <li>
-                        <Link href="/upcoming-events">Upcoming Events</Link>
-                      </li>
-                    </ul>
+                  <li className={`has-submenu ${expandedSubmenu === "events" ? "open" : ""}`}>
+                    <div className="grip__mobile__link-row">
+                      <Link href="/upcoming-events" onClick={() => setMobileOpen(false)}>
+                        Events
+                      </Link>
+                      <button
+                        type="button"
+                        className="grip__mobile__expand-btn"
+                        onClick={(e) => toggleSubmenu("events", e)}
+                        aria-label="Toggle Events submenu"
+                      >
+                        {expandedSubmenu === "events" ? "−" : "+"}
+                      </button>
+                    </div>
+                    {expandedSubmenu === "events" && (
+                      <ul className="grip__mobile__submenu">
+                        <li>
+                          <Link href="/upcoming-events" onClick={() => setMobileOpen(false)}>
+                            Upcoming Events
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
                   </li>
-                  <li>
-                    <Link href="/contact">Contact</Link>
+                  <li className={isActive("/contact")}>
+                    <Link href="/contact" onClick={() => setMobileOpen(false)}>
+                      Contact
+                    </Link>
                   </li>
                 </>
               )}
             </ul>
           </nav>
-        </div>
-      </section>
+        )}
+      </header>
 
       <style>{`
         .si__header__area.inner-page-header,

@@ -25,24 +25,8 @@ export default async function Home() {
         className="si__slider__area bg"
         role="img"
         aria-label="Business team in a meeting – GRIP, India's 1st digital business networking platform"
-        style={{ background: "url(/assets/images/slider/banner.jpeg)" }}
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="si__slider__content text-center">
-                <h1 className="wow fadeInUp animated" data-wow-delay=".2s">
-                  Global Referral Interacting Platform <br />
-                  <span>
-                    India&apos;s 1<small style={{ fontSize: "0.6em", verticalAlign: "super" }}>st</small>{" "}
-                    Digital Business Networking Platform
-                  </span>
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        style={{ background: "url(/assets/images/slider/gripbanner1.jpeg)" }}
+      />
 
       {/* Why Choose Us */}
       <section className="si__why__choose__area pt-60 pb-120">

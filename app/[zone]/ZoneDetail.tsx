@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 
-const PROD_API   = "https://api.gripforum.com/api";
+const PROD_API = "https://api.gripforum.com/api";
 
 function toTitle(slug: string) {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -218,7 +218,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
         .zone-hero {
           position: relative;
           min-height: 280px;
-          background-image: url("/assets/images/slider/banner.jpeg");
+          background-image: url("/assets/images/slider/gripbanner1.jpeg");
           background-size: cover;
           background-position: center;
           display: flex;

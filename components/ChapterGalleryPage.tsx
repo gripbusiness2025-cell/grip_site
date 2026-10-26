@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 
-const PROD_API   = "https://api.gripforum.com/api";
-const PROD_IMG   = "https://api.gripforum.com/api/public";
+const PROD_API = "https://api.gripforum.com/api";
+const PROD_IMG = "https://api.gripforum.com/api/public";
 
 function toTitle(slug: string) {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -118,13 +118,13 @@ export default function ChapterGalleryPage({
   zoneSlug: string;
   chapterSlug: string;
 }) {
-  const [albums,      setAlbums]      = useState<Album[]>([]);
-  const [loading,     setLoading]     = useState(true);
-  const [imgBase,     setImgBase]     = useState(PROD_IMG);
-  const [chapterId,   setChapterId]   = useState<string | null>(null);
-  const [heroBgUrl,   setHeroBgUrl]   = useState<string | null>(null);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [imgBase, setImgBase] = useState(PROD_IMG);
+  const [chapterId, setChapterId] = useState<string | null>(null);
+  const [heroBgUrl, setHeroBgUrl] = useState<string | null>(null);
   const [chapterName, setChapterName] = useState<string>("");
-  const [lightbox,    setLightbox]    = useState<{ albumIdx: number; imgIdx: number } | null>(null);
+  const [lightbox, setLightbox] = useState<{ albumIdx: number; imgIdx: number } | null>(null);
   const [openAlbumId, setOpenAlbumId] = useState<string | null>(null);
 
   const chapterTitle = chapterName || toTitle(chapterSlug);
@@ -199,11 +199,11 @@ export default function ChapterGalleryPage({
     setLightbox({ albumIdx: aIdx, imgIdx: iIdx });
   const closeLightbox = () => setLightbox(null);
 
-  const lbAlbum   = lightbox !== null ? albums[lightbox.albumIdx] : null;
-  const lbImages  = lbAlbum?.images ?? [];
-  const lbIdx     = lightbox?.imgIdx ?? 0;
-  const lbPrev    = () => setLightbox((lb) => lb && { ...lb, imgIdx: (lb.imgIdx - 1 + lbImages.length) % lbImages.length });
-  const lbNext    = () => setLightbox((lb) => lb && { ...lb, imgIdx: (lb.imgIdx + 1) % lbImages.length });
+  const lbAlbum = lightbox !== null ? albums[lightbox.albumIdx] : null;
+  const lbImages = lbAlbum?.images ?? [];
+  const lbIdx = lightbox?.imgIdx ?? 0;
+  const lbPrev = () => setLightbox((lb) => lb && { ...lb, imgIdx: (lb.imgIdx - 1 + lbImages.length) % lbImages.length });
+  const lbNext = () => setLightbox((lb) => lb && { ...lb, imgIdx: (lb.imgIdx + 1) % lbImages.length });
 
   const totalPhotos = albums.reduce((n, a) => n + a.images.length, 0);
 
@@ -215,7 +215,7 @@ export default function ChapterGalleryPage({
       <section
         className="gallery-hero"
         style={{
-          backgroundImage: `url(${heroBgUrl || "/assets/images/slider/banner.jpeg"})`,
+          backgroundImage: `url(${heroBgUrl || "/assets/images/slider/gripbanner1.jpeg"})`,
         }}
       >
         <div className="gallery-hero-overlay" />

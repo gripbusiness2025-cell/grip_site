@@ -26,6 +26,8 @@ export default function Preloader() {
       if (loaded === total) done();
     }
 
+    const timer = setTimeout(done, 2000);
+
     images.forEach((img) => {
       if (img.complete) {
         onLoad();
@@ -34,6 +36,8 @@ export default function Preloader() {
         img.addEventListener("error", onLoad);
       }
     });
+
+    return () => clearTimeout(timer);
   }, []);
 
   if (!visible) return null;

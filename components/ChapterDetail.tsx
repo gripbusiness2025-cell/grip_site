@@ -44,11 +44,11 @@ function MemberCard({
   chapterName?: string;
   zoneName?: string;
 }) {
-  const name    = member.name || "—";
-  const role    = member.chapterRole || member.role || "";
+  const name = member.name || "—";
+  const role = member.chapterRole || member.role || "";
   const company = member.company || "";
-  const email   = member.email || "";
-  const phone   = member.phone || "";
+  const email = member.email || "";
+  const phone = member.phone || "";
   const hasPhoto = !!member.photo;
 
   const rawLink = (profileLink || member.profileLink || "").trim();
@@ -94,11 +94,11 @@ function MemberCard({
       </div>
       <div className="chapter-member-body">
         <h6 className="chapter-member-name">{name}</h6>
-        {role    && <p className="chapter-member-role">{role}</p>}
+        {role && <p className="chapter-member-role">{role}</p>}
         {company && <p className="chapter-member-company">{company}</p>}
         <div className="chapter-member-footer">
           <div className="chapter-member-icons">
-            {phone && <a href={`tel:${phone}`}    title={phone}><i className="fa-solid fa-phone" /></a>}
+            {phone && <a href={`tel:${phone}`} title={phone}><i className="fa-solid fa-phone" /></a>}
             {email && <a href={`mailto:${email}`} title={email}><i className="fa-solid fa-envelope" /></a>}
           </div>
           <a
@@ -157,7 +157,7 @@ export default function ChapterDetail({
   zoneSlug: string;
   chapterSlug: string;
 }) {
-  const [members,     setMembers]     = useState<Member[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [memberLinks, setMemberLinks] = useState<Record<string, string>>({});
   const [chapterInfo, setChapterInfo] = useState<{
     name?: string;
@@ -173,10 +173,10 @@ export default function ChapterDetail({
   const [loading, setLoading] = useState(true);
 
   const chapterTitle = chapterInfo?.name || toTitle(chapterSlug);
-  const zoneTitle    = chapterInfo?.zone  || toTitle(zoneSlug);
-  const weekday      = chapterInfo?.weekday || "";
-  const meetingTime  = chapterInfo?.meetingTime || "7:00 AM";
-  const venue        = chapterInfo?.venue || chapterInfo?.stateName || zoneTitle;
+  const zoneTitle = chapterInfo?.zone || toTitle(zoneSlug);
+  const weekday = chapterInfo?.weekday || "";
+  const meetingTime = chapterInfo?.meetingTime || "7:00 AM";
+  const venue = chapterInfo?.venue || chapterInfo?.stateName || zoneTitle;
   const totalAssociates = chapterInfo?.totalAssociates ?? members.length;
 
   useEffect(() => {
@@ -261,7 +261,7 @@ export default function ChapterDetail({
 
   const roleOf = (m: Member) => (m.chapterRole || m.role || "").toLowerCase();
 
-  const headTeam    = members
+  const headTeam = members
     .filter((m) => HEAD_ROLES.some((r) => roleOf(m).includes(r)))
     .sort((a, b) => {
       const order = (m: Member) => {
@@ -274,11 +274,11 @@ export default function ChapterDetail({
       };
       return order(a) - order(b);
     });
-  const assocCom    = members.filter((m) =>
+  const assocCom = members.filter((m) =>
     !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
     ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r))
   );
-  const coordTeam   = members.filter((m) =>
+  const coordTeam = members.filter((m) =>
     !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
     !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) &&
     COORD_ROLES.some((r) => roleOf(m).includes(r))
@@ -304,7 +304,7 @@ export default function ChapterDetail({
       {/* Hero */}
       <section
         className="chapter-hero"
-        style={{ backgroundImage: `url(${chapterInfo?.bgImageUrl || "/assets/images/slider/banner.jpeg"})` }}
+        style={{ backgroundImage: `url(${chapterInfo?.bgImageUrl || "/assets/images/slider/gripbanner1.jpeg"})` }}
       >
         <div className="chapter-hero-overlay" />
         <div className="container chapter-hero-content">
@@ -443,7 +443,7 @@ export default function ChapterDetail({
             <div className="sk-header" />
             <div className="chapter-role-section">
               <div className="chapter-members-grid chapter-members-grid--leadership">
-                {[0,1,2].map((i) => (
+                {[0, 1, 2].map((i) => (
                   <div key={i} className="sk-card">
                     <div className="sk-role-label" />
                     <div className="sk-avatar" />
