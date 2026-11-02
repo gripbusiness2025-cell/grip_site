@@ -218,7 +218,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
         .zone-hero {
           position: relative;
           min-height: 280px;
-          background-image: url("/assets/images/slider/gripbanner1.jpeg");
+          background-image: url("/assets/images/slider/banner1.jpeg");
           background-size: cover;
           background-position: center;
           display: flex;

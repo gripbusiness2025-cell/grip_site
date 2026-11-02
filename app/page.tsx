@@ -25,7 +25,7 @@ export default async function Home() {
         className="si__slider__area bg"
         role="img"
         aria-label="Business team in a meeting – GRIP, India's 1st digital business networking platform"
-        style={{ background: "url(/assets/images/slider/gripbanner1.jpeg)" }}
+        style={{ background: "url(/assets/images/slider/banner1.jpeg)" }}
       />
 
       {/* Why Choose Us */}

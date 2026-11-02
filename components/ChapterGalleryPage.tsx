@@ -215,7 +215,7 @@ export default function ChapterGalleryPage({
       <section
         className="gallery-hero"
         style={{
-          backgroundImage: `url(${heroBgUrl || "/assets/images/slider/gripbanner1.jpeg"})`,
+          backgroundImage: `url(${heroBgUrl || "/assets/images/slider/banner1.jpeg"})`,
         }}
       >
         <div className="gallery-hero-overlay" />

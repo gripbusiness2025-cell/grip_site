@@ -304,7 +304,7 @@ export default function ChapterDetail({
       {/* Hero */}
       <section
         className="chapter-hero"
-        style={{ backgroundImage: `url(${chapterInfo?.bgImageUrl || "/assets/images/slider/gripbanner1.jpeg"})` }}
+        style={{ backgroundImage: `url(${chapterInfo?.bgImageUrl || "/assets/images/slider/banner1.jpeg"})` }}
       >
         <div className="chapter-hero-overlay" />
         <div className="container chapter-hero-content">
