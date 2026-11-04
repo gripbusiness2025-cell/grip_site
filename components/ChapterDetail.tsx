@@ -150,15 +150,28 @@ function RoleGroup({
 }
 
 /* ─── main component ──────────────────────────── */
+function linkMapOf(list: any) {
+  const map: Record<string, string> = {};
+  if (Array.isArray(list)) {
+    list.forEach(({ memberId, profileLink }: any) => {
+      if (memberId && profileLink) map[String(memberId)] = profileLink;
+    });
+  }
+  return map;
+}
+
 export default function ChapterDetail({
   zoneSlug,
   chapterSlug,
+  initialData,
 }: {
   zoneSlug: string;
   chapterSlug: string;
+  /** Server-fetched data so the member list is in the first HTML (SEO) */
+  initialData?: { members: Member[]; chapterInfo: any };
 }) {
-  const [members, setMembers] = useState<Member[]>([]);
-  const [memberLinks, setMemberLinks] = useState<Record<string, string>>({});
+  const [members, setMembers] = useState<Member[]>(initialData?.members || []);
+  const [memberLinks, setMemberLinks] = useState<Record<string, string>>(linkMapOf(initialData?.chapterInfo?.memberLinks));
   const [chapterInfo, setChapterInfo] = useState<{
     name?: string;
     weekday?: string;
@@ -169,8 +182,8 @@ export default function ChapterDetail({
     totalAssociates?: number;
     bgImageUrl?: string | null;
     memberLinks?: { memberId: string; profileLink: string }[];
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
+  } | null>(initialData?.chapterInfo || null);
+  const [loading, setLoading] = useState(!initialData);
 
   const chapterTitle = chapterInfo?.name || toTitle(chapterSlug);
   const zoneTitle = chapterInfo?.zone || toTitle(zoneSlug);
@@ -180,6 +193,7 @@ export default function ChapterDetail({
   const totalAssociates = chapterInfo?.totalAssociates ?? members.length;
 
   useEffect(() => {
+    if (initialData) return;
     async function load() {
       // 1. Try the internal Next.js API route (uses server-side token → Node.js backend)
       try {
@@ -247,7 +261,7 @@ export default function ChapterDetail({
       setLoading(false);
     }
     load();
-  }, [chapterSlug, zoneSlug]);
+  }, [chapterSlug, zoneSlug, initialData]);
 
   // ── group members by role ──────────────────────
   const HEAD_ROLES = ["president", "vice president", "secretary", "treasurer"];

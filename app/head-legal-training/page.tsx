@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import SubNav from "@/components/SubNav";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/head-legal-training", {
   title: "Head – Legal & Training – GRIP India's 1st Digital Business Networking Forum",
   description: "GRIP Head of Legal and Training – leadership driving compliance and learning.",
-};
+});
 
 export default function HeadLegalTraining() {
   return (
@@ -20,7 +21,7 @@ export default function HeadLegalTraining() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center pb-40">
-              <h1 className="text-anime-style-3">Head – Legal &amp; Training</h1>
+              <h2 className="text-anime-style-3 as-h1">Head – Legal &amp; Training</h2>
               <p>
                 Our legal and training leadership ensures every GRIP associate
                 operates with full integrity, knowledge, and compliance.

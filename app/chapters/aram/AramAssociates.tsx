@@ -152,7 +152,7 @@ export default function AramAssociates() {
         <div className="container">
           {data.head_team?.length > 0 && (
             <>
-              <h1 className="aram">Head Team</h1>
+              <h2 className="aram as-h1">Head Team</h2>
               <div className="row">
                 {data.head_team.map((member) => (
                   <TeamCard key={member.id} member={member} />
@@ -165,7 +165,7 @@ export default function AramAssociates() {
 
           {data.visitor_interaction_team?.length > 0 && (
             <>
-              <h1 className="aram">Visitor Interaction Team</h1>
+              <h2 className="aram as-h1">Visitor Interaction Team</h2>
               <div className="row">
                 {data.visitor_interaction_team.map((member) => (
                   <TeamCard key={member.id} member={member} />
@@ -178,7 +178,7 @@ export default function AramAssociates() {
 
           {data.members?.length > 0 && (
             <>
-              <h1 className="aram">Associates</h1>
+              <h2 className="aram as-h1">Associates</h2>
               <div className="row">
                 {data.members.map((member) => (
                   <TeamCard key={member.id} member={member} />

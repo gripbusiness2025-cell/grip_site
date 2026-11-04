@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/membership-policies", {
   title: "Associate Policies – GRIP India's 1st Digital Business Networking Forum",
   description: "GRIP Policies and Guidelines for Associates.",
-};
+});
 
 export default function MembershipPolicies() {
   return (

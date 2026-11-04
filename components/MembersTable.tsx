@@ -22,13 +22,16 @@ type SortCol = "name" | "company";
 export default function MembersTable({
   zoneSlug,
   chapterSlug,
+  initialData,
 }: {
   zoneSlug: string;
   chapterSlug: string;
+  /** Server-fetched data so the member list is in the first HTML (SEO) */
+  initialData?: { members: Member[]; chapterName: string };
 }) {
-  const [members, setMembers]       = useState<Member[]>([]);
-  const [chapterName, setChapterName] = useState("");
-  const [loading, setLoading]       = useState(true);
+  const [members, setMembers]       = useState<Member[]>(initialData?.members || []);
+  const [chapterName, setChapterName] = useState(initialData?.chapterName || "");
+  const [loading, setLoading]       = useState(!initialData);
   const [search, setSearch]         = useState("");
   const [sort, setSort]             = useState<{ col: SortCol; dir: 1 | -1 }>({ col: "name", dir: 1 });
 
@@ -36,6 +39,7 @@ export default function MembersTable({
   const backHref = `/${zoneSlug}/${chapterSlug}`;
 
   useEffect(() => {
+    if (initialData) return;
     async function load() {
       try {
         const res = await fetch(
@@ -50,7 +54,7 @@ export default function MembersTable({
       setLoading(false);
     }
     load();
-  }, [chapterSlug, zoneSlug]);
+  }, [chapterSlug, zoneSlug, initialData]);
 
   const toggleSort = (col: SortCol) =>
     setSort((s) => ({ col, dir: s.col === col ? ((-s.dir) as 1 | -1) : 1 }));
@@ -95,7 +99,7 @@ export default function MembersTable({
         <div className="container">
           <div className="mt-page-header">
             <div>
-              <h2 className="mt-page-title">GRIP – {chapterTitle} Chapter</h2>
+              <h1 className="mt-page-title">GRIP – {chapterTitle} Chapter</h1>
               <p className="mt-page-sub">All Associates</p>
             </div>
             {!loading && (

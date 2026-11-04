@@ -58,7 +58,14 @@ export default function ZoneEventsPage({ params }: Props) {
           if (!res.ok) continue;
           const json = await res.json();
           if (json.success && Array.isArray(json.data)) {
-            setEvents(json.data);
+            // Only show events that have not ended yet
+            const now = Date.now();
+            setEvents(
+              json.data.filter((e: EventItem) => {
+                const t = new Date(e.endDate || e.startDate).getTime();
+                return Number.isNaN(t) || t >= now;
+              })
+            );
             setLoading(false);
             return;
           }
@@ -104,12 +111,12 @@ export default function ZoneEventsPage({ params }: Props) {
                   <i className="fa-regular fa-chevrons-left"></i> UPCOMING EVENTS{" "}
                   <i className="fa-regular fa-chevrons-right"></i>
                 </h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   What&apos;s Next in <br />
                   <span className="si__section__title__highlight">
                     {zoneName}? <UnderlineSvg />
                   </span>
-                </h1>
+                </h2>
               </div>
             </div>
           </div>

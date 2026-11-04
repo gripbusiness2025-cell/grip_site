@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,11 +7,11 @@ import Preloader from "@/components/Preloader";
 import UnderlineSvg from "@/components/UnderlineSvg";
 import { fetchWebsiteEvents } from "@/lib/websiteEvents";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/", {
   title: "GRIP – Global Referral Interacting Platform for Professional Networking",
   description:
     "GRIP is a global referral-based networking platform fostering ethical collaboration, structured business growth, and meaningful professional connections.",
-};
+});
 
 export default async function Home() {
   const events = await fetchWebsiteEvents();
@@ -96,9 +97,9 @@ export default async function Home() {
             <div className="col-lg-12">
               <div className="si__three__section__title mb-52 text-center">
                 <br />
-                <h1 className="text-white text-anime-style-3">
+                <h2 className="text-white text-anime-style-3 as-h1">
                   Uniqueness of <span>GRIP</span>
-                </h1>
+                </h2>
                 <p className="text-white">
                   Discover how GRIP helps professionals thrive through smart,
                   structured networking solutions.
@@ -231,13 +232,13 @@ export default async function Home() {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__section__title pb-40 text-center">
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   How GRIP helps <br />{" "}
                   <span className="si__section__title__highlight">
                     Business <UnderlineSvg />
                   </span>{" "}
                   grow?
-                </h1>
+                </h2>
               </div>
             </div>
           </div>
@@ -328,12 +329,12 @@ export default async function Home() {
               <div className="si__our__features__box">
                 <div className="si__our__features__box__inner">
                   <div className="si__section__title pb-40">
-                    <h1 className="text-white text-anime-style-3">
+                    <h2 className="text-white text-anime-style-3 as-h1">
                       Join the <br />{" "}
                       <span className="si__section__title__highlight">
                         Revolution! <UnderlineSvg />
                       </span>
-                    </h1>
+                    </h2>
                     <div className="si__our__features__box__content">
                       <p>
                         <b>
@@ -386,13 +387,13 @@ export default async function Home() {
                   <i className="fa-regular fa-chevrons-left"></i> oUR Upcoming
                   Events <i className="fa-regular fa-chevrons-right"></i>
                 </h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   What&apos;s Next at GRIP? <br /> Mark Your{" "}
                   <span className="si__section__title__highlight">
                     Calendar! <UnderlineSvg />
                   </span>{" "}
                   Time
-                </h1>
+                </h2>
               </div>
             </div>
           </div>

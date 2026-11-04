@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, organizationLd, websiteLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "GRIP – Global Referral Interacting Platform for Professional Networking",
   description:
     "GRIP is a global referral-based networking platform fostering ethical collaboration, structured business growth, and meaningful professional connections.",
@@ -15,7 +18,6 @@ export const metadata: Metadata = {
     title: "GRIP – Global Referral Interacting Platform for Professional Networking",
     description:
       "Join GRIP, the trusted global platform for professionals to build referral-based connections, collaborate ethically, and grow through structured networking.",
-    url: "https://gripforum.com/",
     type: "website",
     images: [{ url: "https://gripforum.com/assets/images/logo/logo-grip.jpg" }],
   },
@@ -67,6 +69,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
+        <JsonLd data={[organizationLd(), websiteLd()]} />
         {children}
 
         {/* JS – jQuery must load first */}

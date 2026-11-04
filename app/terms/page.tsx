@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/terms", {
   title: "Terms & Conditions – GRIP India's 1st Digital Business Networking Forum",
   description: "GRIP Terms and Conditions – please read before using our platform.",
-};
+});
 
 export default function Terms() {
   return (

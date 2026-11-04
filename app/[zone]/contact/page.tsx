@@ -110,9 +110,9 @@ export default function ZoneContactPage({ params }: Props) {
             <div className="col-lg-12">
               <div className="si__section__title pb-40">
                 <h5>talk with US</h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   Unlocking potential the <br /> delivering results
-                </h1>
+                </h2>
               </div>
             </div>
             <div className="col-lg-8">

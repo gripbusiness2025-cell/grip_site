@@ -27,10 +27,11 @@ interface Chapter {
   };
 }
 
-export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
-  const [chapters, setChapters] = useState<Chapter[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [zoneFound, setZoneFound] = useState<boolean | null>(null);
+export default function ZoneDetail({ zoneSlug, initialChapters }: { zoneSlug: string; initialChapters?: Chapter[] }) {
+  // initialChapters comes from the server so the list is in the first HTML
+  const [chapters, setChapters] = useState<Chapter[]>(initialChapters || []);
+  const [loading, setLoading] = useState(!initialChapters);
+  const [zoneFound, setZoneFound] = useState<boolean | null>(initialChapters ? true : null);
   const zoneTitle = toTitle(zoneSlug);
 
   const allowedNames = ["ARAM", "VIRUTCHAM", "NEXOR", "EDUCATION"];
@@ -73,6 +74,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
   };
 
   useEffect(() => {
+    if (initialChapters) return;
     async function load() {
       setLoading(true);
       for (const base of [PROD_API]) {
@@ -109,7 +111,7 @@ export default function ZoneDetail({ zoneSlug }: { zoneSlug: string }) {
       setLoading(false);
     }
     load();
-  }, [zoneSlug]);
+  }, [zoneSlug, initialChapters]);
 
   // Zone doesn't exist → show 404
   if (!loading && zoneFound === false) {

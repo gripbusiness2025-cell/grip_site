@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubNav from "@/components/SubNav";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/policies", {
   title: "GRIP App Policies – Privacy Policy & Terms",
   description: "GRIP app privacy policy, terms and conditions, and permission details.",
-};
+});
 
 export default function Policies() {
   return (
@@ -19,9 +20,9 @@ export default function Policies() {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__project__details__content mb-4">
-                <h3 className="text-anime-style-3">
+                <h1 className="text-anime-style-3 as-h3">
                   Privacy Policy &amp; Terms and Conditions
-                </h3>
+                </h1>
                 <p>
                   Welcome to our app. Your privacy is important to us. This
                   document outlines how we handle your data and what permissions

@@ -64,10 +64,33 @@ function buildImageUrl(
   return `${imgBase}/${image.docPath}/${image.docName}`;
 }
 
+/**
+ * Reads the "Date: ..." line from an event description
+ * (e.g. "16 September 2026", "26th September 2026", "October 2nd, 2026").
+ * Returns null when there is no readable date.
+ */
+export function eventDateFromDescription(description: string): Date | null {
+  const m = /Date:\s*([^\n(]+)/i.exec(description || "");
+  if (!m) return null;
+  const clean = m[1].replace(/(\d+)(st|nd|rd|th)/gi, "$1").replace(/,/g, " ").trim();
+  const d = new Date(clean);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+/** Drops events whose date has already passed (so past events are not shown as upcoming). */
+function onlyUpcoming(events: WebsiteEventCard[]): WebsiteEventCard[] {
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  return events.filter((e) => {
+    const d = eventDateFromDescription(e.description);
+    return !d || d >= startOfToday;
+  });
+}
+
 export async function fetchWebsiteEvents(): Promise<WebsiteEventCard[]> {
   try {
     const res = await fetch(`${PROD_API}/public/website/events`, {
-      cache: "no-store",
+      next: { revalidate: 300 }, // cached 5 min instead of no-store (SEO: cacheable pages)
     });
     if (res.ok) {
       const json = await res.json();
@@ -100,13 +123,13 @@ export async function fetchWebsiteEvents(): Promise<WebsiteEventCard[]> {
           events.push(HORIZON_EVENT);
         }
 
-        return events;
+        return onlyUpcoming(events);
       }
     }
   } catch {
     /* fall through to fallback */
   }
-  return FALLBACK_EVENTS;
+  return onlyUpcoming(FALLBACK_EVENTS);
 }
 
 

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import SubNav from "@/components/SubNav";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/founding-executive-directors", {
   title: "Founding Executive Directors – GRIP India's 1st Digital Business Networking Forum",
   description: "Meet the Founding Executive Directors of GRIP.",
-};
+});
 
 const members = [
   {
@@ -89,7 +90,7 @@ export default function FoundingExecutiveDirectors() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center pb-20">
-              <h1 className="text-anime-style-3">Founding Executive Directors</h1>
+              <h2 className="text-anime-style-3 as-h1">Founding Executive Directors</h2>
               <p style={{ maxWidth: 680, margin: "0 auto", color: "#555", fontSize: "17px", lineHeight: "1.7" }}>
                 The visionary leaders who laid the foundation of GRIP and continue to shape its growth across India and beyond.
               </p>

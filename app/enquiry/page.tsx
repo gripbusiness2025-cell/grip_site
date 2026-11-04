@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/enquiry", {
   title: "Enquiry – GRIP India's 1st Digital Business Networking Forum",
   description: "Enquire about becoming a GRIP associate.",
-};
+});
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://gripforum.com";
 
@@ -22,9 +23,9 @@ export default function Enquiry() {
             <div className="cl-lg-12">
               <div className="si__section__title pb-40">
                 <h5>talk with US</h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   Unlocking potential the <br /> delivering results
-                </h1>
+                </h2>
               </div>
             </div>
             <div className="col-lg-8">

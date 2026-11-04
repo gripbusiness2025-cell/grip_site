@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/privacy", {
   title: "Privacy Policy & Terms – GRIP India's 1st Digital Business Networking Forum",
   description:
     "GRIP Privacy Policy & Terms and Conditions – learn how we handle your data and what permissions are required to provide specific features.",
-};
+});
 
 export default function Privacy() {
   return (

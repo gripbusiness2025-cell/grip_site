@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import UnderlineSvg from "@/components/UnderlineSvg";
 import { fetchWebsiteEvents } from "@/lib/websiteEvents";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/upcoming-events", {
   title: "Upcoming Events – GRIP India's 1st Digital Business Networking Forum",
   description: "Stay updated with the latest upcoming events at GRIP.",
-};
+});
 
 export default async function UpcomingEvents() {
   const events = await fetchWebsiteEvents();
@@ -27,13 +28,13 @@ export default async function UpcomingEvents() {
                   <i className="fa-regular fa-chevrons-left"></i> oUR Upcoming
                   Events <i className="fa-regular fa-chevrons-right"></i>
                 </h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   What&apos;s Next at GRIP? <br /> Mark Your{" "}
                   <span className="si__section__title__highlight">
                     Calendar! <UnderlineSvg />
                   </span>{" "}
                   Time
-                </h1>
+                </h2>
               </div>
             </div>
           </div>

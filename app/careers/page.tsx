@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubNav from "@/components/SubNav";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/careers", {
   title: "Careers – GRIP India's 1st Digital Business Networking Forum",
   description: "Join the GRIP team. Explore career opportunities at GRIP.",
-};
+});
 
 const benefits = [
   {
@@ -89,7 +90,7 @@ export default function Careers() {
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="si__section__title colortwo">
-                <h1 className="text-anime-style-3">Who We&apos;re Looking For</h1>
+                <h2 className="text-anime-style-3 as-h1">Who We&apos;re Looking For</h2>
               </div>
             </div>
           </div>

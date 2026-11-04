@@ -79,7 +79,7 @@ export default function FranchisePartnersPage() {
               >
                 Franchise Partners
               </h5>
-              <h1 style={{ fontWeight: 800, marginBottom: 12 }}>Our Zones</h1>
+              <h2 className="as-h1" style={{ fontWeight: 800, marginBottom: 12 }}>Our Zones</h2>
               <p style={{ color: "#666", fontSize: 16, maxWidth: 640, margin: "0 auto" }}>
                 Explore GRIP zones across the network. Select a zone to view chapters and partner details.
               </p>

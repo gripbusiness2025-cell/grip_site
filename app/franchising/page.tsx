@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UnderlineSvg from "@/components/UnderlineSvg";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/franchising", {
   title: "GRIP Franchising – Grow With Us Across India and Beyond",
   description:
     "GRIP Franchising – exceptional franchising opportunities across India and globally with proven business strategies and comprehensive support.",
-};
+});
 
 const franchiseReasons = [
   {
@@ -116,9 +117,9 @@ export default function Franchising() {
             <div className="col-lg-7">
               <div className="si__three__section__title mb-43">
                 <h5>GRIP Franchising</h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   Why Choose GRIP Franchising?
-                </h1>
+                </h2>
               </div>
               <div className="si__service__four__main">
                 {franchiseReasons.map((item) => (
@@ -186,9 +187,9 @@ export default function Franchising() {
           <div className="row">
             <div className="col-lg-12">
               <div className="si__three__section__title mb-43 text-center text-white">
-                <h1 className="text-white text-anime-style-3">
+                <h2 className="text-white text-anime-style-3 as-h1">
                   Ready to Build a Future with GRIP?
-                </h1>
+                </h2>
                 <p>
                   For franchising opportunities in India and internationally, get in
                   touch with
@@ -217,9 +218,9 @@ export default function Franchising() {
           <div className="row">
             <div className="col-lg-7" style={{ paddingTop: "60px" }}>
               <div className="si__three__section__title mb-43">
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   Our Commitment to Franchise <br /> Partners
-                </h1>
+                </h2>
                 <p>
                   We are committed to providing our franchise partners with the
                   tools, knowledge, and resources needed to thrive. With GRIP, you

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubNav from "@/components/SubNav";
 import UnderlineSvg from "@/components/UnderlineSvg";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/about", {
   title: "Why Choose GRIP – Digital Networking, Leadership, and Cross-Industry Growth",
   description:
     "Discover why professionals choose GRIP – a platform for seamless digital networking, weekly leadership insights, and powerful cross-industry collaboration to fuel innovation.",
-};
+});
 
 export default function About() {
   return (
@@ -83,12 +84,12 @@ export default function About() {
                 <h5>
                   Work Process <i className="fa-regular fa-chevrons-right"></i>
                 </h5>
-                <h1 className="text-anime-style-3">
+                <h2 className="text-anime-style-3 as-h1">
                   Why Choose GRIP?{" "}
                   <span className="si__section__title__highlight">
                     <UnderlineSvg />
                   </span>
-                </h1>
+                </h2>
               </div>
             </div>
             <div className="col-lg-6">

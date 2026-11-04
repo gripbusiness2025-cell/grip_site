@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { withSeo } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubNav from "@/components/SubNav";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSeo("/founder", {
   title: "GRIP Founder – Meet the Visionary Behind Global Referral Interacting Platform",
   description:
     "Meet R. Pratheep Gandhi, Founder & CEO of GRIP – a peak performance business coach and life strategist driving ethical collaboration, innovation, and professional growth.",
-};
+});
 
 export default function Founder() {
   return (
@@ -17,9 +18,9 @@ export default function Founder() {
 
       <div className="pt-60">
         <div className="container">
-          <h2>
+          <h1 className="as-h2">
             <span style={{ color: "#d23b3b" }}>GRIP Founder</span>
-          </h2>
+          </h1>
         </div>
       </div>
 
