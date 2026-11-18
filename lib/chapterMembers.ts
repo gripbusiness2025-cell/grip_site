@@ -1,7 +1,13 @@
+import { REVALIDATE_SECONDS } from "@/lib/seo";
+
 /*
  * Chapter + member data for a chapter page. Moved here from
  * app/api/chapter-members/route.ts so server pages can render the member
  * list into the HTML (for search engines) while the API route keeps working.
+ *
+ * IMPORTANT: fetches must use `next: { revalidate }` to match
+ * app/[zone]/[chapter]/layout.tsx (`export const revalidate = 300`).
+ * Using `cache: "no-store"` here causes a runtime Internal Server Error.
  */
 
 const PROD   = "https://api.gripforum.com/api";
@@ -21,8 +27,10 @@ async function tryFetch(paths: string[]): Promise<Response | null> {
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 4000);
-      // no-store so Head / role changes from admin show up immediately
-      const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
+      const res = await fetch(url, {
+        signal: ctrl.signal,
+        next: { revalidate: REVALIDATE_SECONDS },
+      });
       clearTimeout(t);
       if (res.ok) return res;
     } catch { /* try next */ }
