@@ -29,6 +29,7 @@ interface Member {
   phone?: string;
   photo?: string | null;
   profileLink?: string | null;
+  isTeamHead?: boolean;
 }
 
 function MemberCard({
@@ -93,7 +94,10 @@ function MemberCard({
         )}
       </div>
       <div className="chapter-member-body">
-        <h6 className="chapter-member-name">{name}</h6>
+        <h6 className="chapter-member-name">
+          {name}
+          {member.isTeamHead && <span className="chapter-member-head-badge">Head</span>}
+        </h6>
         {role && <p className="chapter-member-role">{role}</p>}
         {company && <p className="chapter-member-company">{company}</p>}
         <div className="chapter-member-footer">
@@ -237,22 +241,28 @@ export default function ChapterDetail({
         if (res.ok) {
           const json = await res.json();
           if (json?.head_team || json?.visitor_interaction_team || json?.members) {
-            const flatten = (arr: any[], roleTag: string) =>
-              (arr || []).map((m: any, i: number) => ({
-                _id: `${roleTag}-${m.id ?? i}`,
-                name: m.name || "",
-                role: m.sub_category || roleTag,
-                company: m.business_name || "",
-                email: m.email || "",
-                phone: "",
-                photo: m.photo
-                  ? `${PHP_URL}/application/uploads/${m.photo}`
-                  : null,
-              }));
+            const flatten = (arr: any[], defaultRole: string) =>
+              (arr || []).map((m: any, i: number) => {
+                const role = m.sub_category || m.role || defaultRole;
+                return {
+                  _id: `${defaultRole}-${m.id ?? i}`,
+                  name: m.name || "",
+                  role,
+                  chapterRole: role,
+                  company: m.business_name || "",
+                  email: m.email || "",
+                  phone: "",
+                  photo: m.photo
+                    ? `${PHP_URL}/application/uploads/${m.photo}`
+                    : null,
+                };
+              });
             setMembers([
-              ...flatten(json.head_team, "head"),
-              ...flatten(json.visitor_interaction_team, "visitor"),
-              ...flatten(json.members, "associate"),
+              ...flatten(json.head_team, "Head Team"),
+              ...flatten(json.visitor_interaction_team, "Visitor Interaction Team"),
+              ...flatten(json.associate_committee, "Associate Committee"),
+              ...flatten(json.coordinator_team, "Coordinator"),
+              ...flatten(json.members, "Associate"),
             ]);
           }
         }
@@ -263,20 +273,30 @@ export default function ChapterDetail({
     load();
   }, [chapterSlug, zoneSlug, initialData]);
 
-  // ── group members by role ──────────────────────
+  // ── group members by role (from head table + associates API) ──
+  // Head Team        → President / Vice President / Secretary / Treasurer
+  // Visitor Interaction Team → head-table "Visitor Interaction Team"
+  // Associate Committee → head-table "Associate Committee"
+  // Coordinator Team → any "*Coordinator*" role
+  // Chapter Associates → all members, A–Z
   const HEAD_ROLES = ["president", "vice president", "secretary", "treasurer"];
   const ASSOC_COM_ROLES = [
     "associate committee",
+    "membership committee",
     "membership",
+  ];
+  const COORD_ROLES = ["coordinator"];
+  const VISITOR_TEAM_ROLES = [
+    "visitor interaction team",
+    "visitor interaction",
     "visitor host",
   ];
-  const COORD_ROLES = ["coordinator", "mentor", "training"];
-  const VISITOR_TEAM_ROLES = ["visitor interaction team", "visitor interaction"];
 
-  const roleOf = (m: Member) => (m.chapterRole || m.role || "").toLowerCase();
+  const roleOf = (m: Member) => (m.chapterRole || m.role || "").toLowerCase().trim();
+  const matches = (m: Member, keys: string[]) => keys.some((r) => roleOf(m).includes(r));
 
   const headTeam = members
-    .filter((m) => HEAD_ROLES.some((r) => roleOf(m).includes(r)))
+    .filter((m) => matches(m, HEAD_ROLES))
     .sort((a, b) => {
       const order = (m: Member) => {
         const r = roleOf(m);
@@ -288,23 +308,32 @@ export default function ChapterDetail({
       };
       return order(a) - order(b);
     });
-  const assocCom = members.filter((m) =>
-    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
-    ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r))
-  );
-  const coordTeam = members.filter((m) =>
-    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
-    !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) &&
-    COORD_ROLES.some((r) => roleOf(m).includes(r))
-  );
-  const visitorTeam = members.filter((m) =>
-    !HEAD_ROLES.some((r) => roleOf(m).includes(r)) &&
-    !ASSOC_COM_ROLES.some((r) => roleOf(m).includes(r)) &&
-    !COORD_ROLES.some((r) => roleOf(m).includes(r)) &&
-    VISITOR_TEAM_ROLES.some((r) => roleOf(m).includes(r))
-  );
+  const byTeamHeadFirst = (a: Member, b: Member) =>
+    Number(!!b.isTeamHead) - Number(!!a.isTeamHead);
 
-  const allAssociates = [...members].sort((a, b) =>
+  const visitorTeam = members
+    .filter((m) => !matches(m, HEAD_ROLES) && matches(m, VISITOR_TEAM_ROLES))
+    .sort(byTeamHeadFirst);
+  const assocCom = members
+    .filter(
+      (m) =>
+        !matches(m, HEAD_ROLES) &&
+        !matches(m, VISITOR_TEAM_ROLES) &&
+        matches(m, ASSOC_COM_ROLES)
+    )
+    .sort(byTeamHeadFirst);
+  const coordTeam = members
+    .filter(
+      (m) =>
+        !matches(m, HEAD_ROLES) &&
+        !matches(m, VISITOR_TEAM_ROLES) &&
+        !matches(m, ASSOC_COM_ROLES) &&
+        matches(m, COORD_ROLES)
+    )
+    .sort(byTeamHeadFirst);
+
+  // Chapter Associates shows every chapter member, A–Z
+  const associates = [...members].sort((a, b) =>
     (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
   );
 
@@ -381,27 +410,28 @@ export default function ChapterDetail({
       </section>
 
 
-      {/* ── Chapter Leadership (President / VP / Secretary / etc.) ── */}
+      {/* ── Chapter Leadership (from head table roles) ── */}
       {!loading && headTeam.length + assocCom.length + coordTeam.length + visitorTeam.length > 0 && (
         <section className="chapter-leadership-section" id="leadership">
           <div className="container">
-            <div className="chapter-leadership-header"><h3>Head Team</h3></div>
-            {/* All leadership roles in ONE row */}
             {headTeam.length > 0 && (
-              <div className="chapter-role-section">
-                <div className="chapter-members-grid chapter-members-grid--leadership">
-                  {headTeam.map((m) => (
-                    <MemberCard
-                      key={m._id}
-                      member={m}
-                      showRoleTop
-                      profileLink={memberLinks[m._id]}
-                      chapterName={chapterTitle}
-                      zoneName={zoneTitle}
-                    />
-                  ))}
+              <>
+                <div className="chapter-leadership-header"><h3>Head Team</h3></div>
+                <div className="chapter-role-section">
+                  <div className="chapter-members-grid chapter-members-grid--leadership">
+                    {headTeam.map((m) => (
+                      <MemberCard
+                        key={m._id}
+                        member={m}
+                        showRoleTop
+                        profileLink={memberLinks[m._id]}
+                        chapterName={chapterTitle}
+                        zoneName={zoneTitle}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </>
             )}
             <RoleGroup
               title="Visitor Interaction Team"
@@ -428,14 +458,14 @@ export default function ChapterDetail({
         </section>
       )}
 
-      {/* ── Chapter Associates (all members) ── */}
-      {!loading && allAssociates.length > 0 && (
+      {/* ── Chapter Associates (all members, A–Z) ── */}
+      {!loading && associates.length > 0 && (
         <section className="chapter-leadership-section" id="members">
           <div className="container">
             <div className="chapter-leadership-header"><h3>Chapter Associates</h3></div>
             <div className="chapter-role-section">
               <div className="chapter-members-grid">
-                {allAssociates.map((m) => (
+                {associates.map((m) => (
                   <MemberCard
                     key={m._id}
                     member={m}
@@ -545,7 +575,19 @@ export default function ChapterDetail({
         .chapter-member-photo { width:90px; height:90px; border-radius:50%; object-fit:cover; object-position:top; border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.15); }
         .chapter-member-initials { display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#c1272d,#e05555); color:#fff; font-size:1.4rem; font-weight:700; letter-spacing:1px; }
         .chapter-member-body { padding:14px 14px 0; text-align:center; flex:1; display:flex; flex-direction:column; }
-        .chapter-member-name { font-weight:700; font-size:13px; color:#111; margin-bottom:4px; line-height:1.3; }
+        .chapter-member-name { font-weight:700; font-size:13px; color:#111; margin-bottom:4px; line-height:1.3; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; }
+        .chapter-member-head-badge {
+          display:inline-block;
+          background:#c1272d;
+          color:#fff;
+          font-size:10px;
+          font-weight:700;
+          letter-spacing:.04em;
+          text-transform:uppercase;
+          padding:2px 8px;
+          border-radius:999px;
+          line-height:1.4;
+        }
         .chapter-member-role { font-size:12px; color:#666; margin-bottom:4px; }
         .chapter-member-company { font-size:12px; font-weight:600; color:#c1272d; margin-bottom:10px; word-break:break-word; flex:1; }
         .chapter-member-footer { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-top:1px solid #ebebeb; margin-top:auto; }

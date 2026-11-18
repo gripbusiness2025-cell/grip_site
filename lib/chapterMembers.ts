@@ -1,5 +1,3 @@
-import { REVALIDATE_SECONDS } from "@/lib/seo";
-
 /*
  * Chapter + member data for a chapter page. Moved here from
  * app/api/chapter-members/route.ts so server pages can render the member
@@ -7,14 +5,24 @@ import { REVALIDATE_SECONDS } from "@/lib/seo";
  */
 
 const PROD   = "https://api.gripforum.com/api";
+const LOCAL  = "http://127.0.0.1:4002/api";
 const IMAGE_URL = "https://api.gripforum.com/api/public";
+
+/** Prefer local backend in dev (has isTeamHead); always fall back to live. */
+const API_BASES = [
+  ...(process.env.NODE_ENV !== "production" || process.env.GRIP_USE_LOCAL_API === "1"
+    ? [process.env.GRIP_API_BASE || LOCAL]
+    : []),
+  process.env.GRIP_API_BASE_PROD || PROD,
+].filter((v, i, a) => v && a.indexOf(v) === i);
 
 async function tryFetch(paths: string[]): Promise<Response | null> {
   for (const url of paths) {
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 4000);
-      const res = await fetch(url, { signal: ctrl.signal, next: { revalidate: REVALIDATE_SECONDS } });
+      // no-store so Head / role changes from admin show up immediately
+      const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
       clearTimeout(t);
       if (res.ok) return res;
     } catch { /* try next */ }
@@ -23,7 +31,7 @@ async function tryFetch(paths: string[]): Promise<Response | null> {
 }
 
 function backends(...path: string[]) {
-  return path.map((p) => `${PROD}${p}`);
+  return path.flatMap((p) => API_BASES.map((base) => `${base}${p}`));
 }
 
 function slugify(s: string) {
@@ -124,18 +132,33 @@ export async function getChapterMembers(chapterSlug: string, zoneSlug: string): 
         arr.map((m: any) => {
           const id = String(m.id || m._id || m.memberId || "");
           const link = m.profileLink || linkMap[id] || "";
+          const role = m.role || m.roleName || m.position || m.chapterRole || defaultRole;
           return {
             _id: id,
             name: m.name || "—",
-            role: m.role || defaultRole,
-            company: m.company || "",
+            role,
+            chapterRole: role,
+            company: m.company || m.companyName || "",
             email: m.email || "",
-            phone: m.phone || "",
+            phone: m.phone || m.mobileNumber || "",
             photo: photoUrl(m.profileImage),
             profileLink: link,
+            isTeamHead: !!m.isTeamHead,
           };
         });
       members = [...norm(headTableRoles, "Head Team"), ...norm(associateList, "Associate")];
+
+      // Enrich isTeamHead from mobile headTableMembers if public payload omitted it
+      const headUsers: any[] = headJson.data || [];
+      if (headUsers.length) {
+        const headFlag = new Map(
+          headUsers.map((u: any) => [String(u.id || u._id), !!u.isTeamHead])
+        );
+        members = members.map((m) => ({
+          ...m,
+          isTeamHead: m.isTeamHead || headFlag.get(String(m._id)) || false,
+        }));
+      }
     } else {
       // Legacy fallback: headTableUsers (CID/Mentors) + all chapter members
       const headUsers: any[] = headJson.data || [];
@@ -147,15 +170,18 @@ export async function getChapterMembers(chapterSlug: string, zoneSlug: string): 
       const headMapped = headUsers.map((u: any, i: number) => {
         const id = String(u.id || u._id || `head-${i}`);
         const link = u.profileLink || linkMap[id] || "";
+        const role = u.roleName || u.position || u.role || u.chapterRole || "Head Team";
         return {
           _id: id,
           name: u.name || "—",
-          role: u.roleName || u.position || "Head Team",
+          role,
+          chapterRole: role,
           company: u.companyName || "",
           email: u.email || "",
           phone: u.mobileNumber || "",
           photo: photoUrl(u.profileImage),
           profileLink: link,
+          isTeamHead: !!u.isTeamHead,
         };
       });
 
@@ -168,11 +194,13 @@ export async function getChapterMembers(chapterSlug: string, zoneSlug: string): 
         .map((m: any, i: number) => {
           const id = String(m.id || m._id || `member-${i}`);
           const link = m.profileLink || linkMap[id] || "";
+          const role = m.roleName || m.role || m.chapterRole || "Associate";
           return {
             _id: id,
             name: m.name || "—",
-            role: "Associate",
-            company: "",
+            role,
+            chapterRole: role,
+            company: m.companyName || "",
             email: m.email || "",
             phone: m.mobileNumber || "",
             photo: null,

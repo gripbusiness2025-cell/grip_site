@@ -377,6 +377,198 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Core Values */}
+      <section className="grip-core-values pt-100 pb-90">
+        <div className="container">
+          <div className="row mb-50">
+            <div className="col-lg-12 text-center">
+              <h2 className="grip-core-values__title">CORE VALUES</h2>
+            </div>
+          </div>
+          <div className="row g-4 g-lg-5">
+            {[
+              {
+                icon: "fa-people-group",
+                title: "Contributors Win™",
+                text: "Success comes from the value you create for others. When you share knowledge, create opportunities, and support fellow entrepreneurs, everyone grows; and Contributors Win™.",
+              },
+              {
+                icon: "fa-handshake",
+                title: "Respect",
+                text: "We respect every Associate, every profession, every idea, and every contribution. We listen with intent, value diverse perspectives, honour our commitments, and uphold the highest standards of professionalism, integrity, and dignity in every interaction.",
+              },
+              {
+                icon: "fa-clipboard-check",
+                title: "Accountability",
+                text: "We take ownership of our commitments, actions, and outcomes. We honour our promises, follow through on opportunities, and build trust through consistent action.",
+              },
+              {
+                icon: "fa-puzzle-piece",
+                title: "Collaboration",
+                text: "We work together, share our strengths, and foster a positive attitude that benefits everyone. Together, we achieve more, grow stronger, and create lasting success through collaboration and positivity.",
+              },
+              {
+                icon: "fa-book-open-reader",
+                title: "Learn to Enrich",
+                text: "We embrace lifelong learning, continuously developing our knowledge and skills to create greater value for ourselves and others. Invest in yourself, grow your value, and become the leader you aspire to be.",
+              },
+              {
+                icon: "fa-hands-clapping",
+                title: "Appreciation",
+                text: "We recognise and value the contributions of others, knowing that genuine appreciation builds stronger teams, inspires success, and creates meaningful growth.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="col-lg-4 col-md-6">
+                <div className="grip-core-values__card">
+                  <div className="grip-core-values__icon">
+                    <i className={`fa-solid ${item.icon}`} />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Uniqueness of GRIP */}
+      <section className="grip-uniqueness pt-40 pb-120">
+        <div className="container">
+          <div className="row mb-50">
+            <div className="col-lg-12 text-center">
+              <h2 className="grip-uniqueness__title">Uniqueness of GRIP</h2>
+            </div>
+          </div>
+          <div className="row g-4 g-lg-5">
+            {[
+              {
+                img: "/assets/images/grip/3.webp",
+                title: "One Touch GRIP App",
+                text: "Android & iOS Apps are User Friendly to track Geographical Attendance; 1-2-1 & all the activities, AI helping Chat box them maximize their potential and Real Recognition Awards.",
+              },
+              {
+                img: "/assets/images/grip/chapter2.jpg",
+                title: "Chapter Mentor",
+                text: "Each chapter will be supported by a Mentor who will travel along the chapter to help each member to achieve their goals in terms of business.",
+              },
+              {
+                img: "/assets/images/grip/aram.jpg",
+                title: "Dedicated Business Webpage",
+                text: "Dedicated digital business page in our official forum website which will fetch our members an additional mileage of global visibility. If a member requests his / her own web page to be added, it can be done.",
+              },
+              {
+                img: "/assets/images/grip/launch2.jpg",
+                title: "Regular Offline Training",
+                text: "Offline Trainings will be conducted twice in a month to help members educate & gain the networking knowledge. Trainings will be increased as per requirement.",
+              },
+              {
+                img: "/assets/images/grip/grip.jpeg",
+                title: "Respect Associates & Digital-First",
+                text: "All associates, including the leadership team, can focus on their businesses. Visitors Entry, Attendance, meeting records and performance tracking are digitally maintained, ensuring a seamless, transparent and completely paperless networking experience.",
+              },
+              {
+                img: "/assets/images/grip/launch.jpg",
+                title: "Knowledge Sharing Sessions",
+                text: "Structured knowledge sharing sessions help associates learn from peers, expand industry insight, and convert networking into real business growth.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="col-lg-4 col-md-6">
+                <div className="grip-uniqueness__card">
+                  <div className="grip-uniqueness__thumb">
+                    <img src={item.img} alt={item.title} />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        .grip-core-values { background: #fff; }
+        .grip-core-values__title {
+          font-size: clamp(2rem, 4vw, 2.75rem);
+          font-weight: 800;
+          color: #1a2b6b;
+          letter-spacing: 0.04em;
+          margin: 0;
+        }
+        .grip-core-values__card { text-align: center; padding: 8px 10px; height: 100%; }
+        .grip-core-values__icon {
+          width: 88px;
+          height: 88px;
+          margin: 0 auto 18px;
+          border-radius: 50%;
+          background: #c1272d;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 30px;
+          box-shadow: 0 10px 24px rgba(193, 39, 45, 0.22);
+        }
+        .grip-core-values__card h4 {
+          font-size: 1.2rem;
+          font-weight: 800;
+          color: #111;
+          margin-bottom: 12px;
+        }
+        .grip-core-values__card p {
+          color: #555;
+          font-size: 14px;
+          line-height: 1.7;
+          margin: 0;
+        }
+        .grip-uniqueness { background: #fafafa; }
+        .grip-uniqueness__title {
+          font-size: clamp(2rem, 4vw, 2.75rem);
+          font-weight: 800;
+          color: #c1272d;
+          margin: 0;
+        }
+        .grip-uniqueness__card {
+          background: #fff;
+          border: 1px solid #eee;
+          border-radius: 12px;
+          padding: 18px;
+          height: 100%;
+          transition: box-shadow .2s, transform .2s;
+        }
+        .grip-uniqueness__card:hover {
+          box-shadow: 0 12px 28px rgba(0,0,0,.08);
+          transform: translateY(-3px);
+        }
+        .grip-uniqueness__thumb {
+          width: 100%;
+          height: 180px;
+          border-radius: 10px;
+          overflow: hidden;
+          margin-bottom: 16px;
+          background: #f2f2f2;
+        }
+        .grip-uniqueness__thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .grip-uniqueness__card h4 {
+          font-size: 1.15rem;
+          font-weight: 800;
+          color: #c1272d;
+          margin-bottom: 10px;
+        }
+        .grip-uniqueness__card p {
+          color: #555;
+          font-size: 14px;
+          line-height: 1.7;
+          margin: 0;
+        }
+      `}</style>
+
       {/* Upcoming Events */}
       <section className="si__our__blog__area pb-120 pt-90">
         <div className="container">
