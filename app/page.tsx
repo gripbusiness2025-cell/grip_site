@@ -21,13 +21,149 @@ export default async function Home() {
       <Preloader />
       <Header />
 
-      {/* Slider Area */}
-      <section
-        className="si__slider__area bg"
-        role="img"
-        aria-label="Business team in a meeting – GRIP, India's 1st digital business networking platform"
-        style={{ background: "url(/assets/images/slider/banner1.jpeg)" }}
-      />
+      {/* Hero banner — img keeps full artwork (no crop/stretch on large screens) */}
+      <section className="si__slider__area si__slider__area--img">
+        <img
+          className="si__slider__banner-img"
+          src="/assets/images/slider/banner1.jpeg"
+          alt="GRIP – Global Referral Interacting Platform, India's First Digital Business Networking Forum"
+          width={1600}
+          height={900}
+          fetchPriority="high"
+        />
+      </section>
+
+      {/* Text Marquee */}
+      <section className="marquee-section">
+        <div className="marquee">
+          {[0, 1].map((group) => (
+            <div className="marquee-group" key={group}>
+              <div className="text">
+                ✅ India&apos;s 1st Digital Business Networking Platform
+              </div>
+              <div className="text weight">✅ Business Mentor Guidance</div>
+              <div className="text">✅ FREE Business Webpage</div>
+              <div className="text weight">✅ One-Touch GRIP App</div>
+              <div className="text">✅ Geo-Location Attendance</div>
+              <div className="text weight">
+                ✅ Zero Paperwork &amp; 100% Digital Platform
+              </div>
+              <div className="text">✅ Real Business Referrals</div>
+              <div className="text weight">✅ Knowledge Sharing Sessions</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Uniqueness of GRIP — directly under scrolling banner */}
+      <section className="grip-uniqueness pt-90 pb-100">
+        <div className="container">
+          <div className="row mb-50">
+            <div className="col-lg-12 text-center">
+              <h2 className="grip-uniqueness__title">Uniqueness of GRIP</h2>
+            </div>
+          </div>
+          <div className="row g-4 g-lg-5">
+            {[
+              {
+                img: "/assets/images/grip/3.webp",
+                title: "One Touch GRIP App",
+                text: "Android & iOS Apps are User Friendly to track Geographical Attendance; 1-2-1 & all the activities, AI helping Chat box them maximize their potential and Real Recognition Awards.",
+              },
+              {
+                img: "/assets/images/grip/chapter2.jpg",
+                title: "Chapter Mentor",
+                text: "Each chapter will be supported by a Mentor who will travel along the chapter to help each member to achieve their goals in terms of business.",
+              },
+              {
+                img: "/assets/images/grip/aram.jpg",
+                title: "Dedicated Business Webpage",
+                text: "Dedicated digital business page in our official forum website which will fetch our members an additional mileage of global visibility. If a member requests his / her own web page to be added, it can be done.",
+              },
+              {
+                img: "/assets/images/grip/launch2.jpg",
+                title: "Regular Offline Training",
+                text: "Offline Trainings will be conducted twice in a month to help members educate & gain the networking knowledge. Trainings will be increased as per requirement.",
+              },
+              {
+                img: "/assets/images/grip/grip.jpeg",
+                title: "Respect Associates & Digital-First",
+                text: "All associates, including the leadership team, can focus on their businesses. Visitors Entry, Attendance, meeting records and performance tracking are digitally maintained, ensuring a seamless, transparent and completely paperless networking experience.",
+              },
+              {
+                img: "/assets/images/grip/launch.jpg",
+                title: "Knowledge Sharing Sessions",
+                text: "Structured knowledge sharing sessions help associates learn from peers, expand industry insight, and convert networking into real business growth.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="col-lg-4 col-md-6">
+                <div className="grip-uniqueness__card">
+                  <div className="grip-uniqueness__thumb">
+                    <img src={item.img} alt={item.title} />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="grip-core-values pt-100 pb-90">
+        <div className="container">
+          <div className="row mb-50">
+            <div className="col-lg-12 text-center">
+              <h2 className="grip-core-values__title">CORE VALUES</h2>
+            </div>
+          </div>
+          <div className="row g-4 g-lg-5">
+            {[
+              {
+                icon: "fa-people-group",
+                title: "Contributors Win™",
+                text: "Success comes from the value you create for others. When you share knowledge, create opportunities, and support fellow entrepreneurs, everyone grows; and Contributors Win™.",
+              },
+              {
+                icon: "fa-handshake",
+                title: "Respect",
+                text: "We respect every Associate, every profession, every idea, and every contribution. We listen with intent, value diverse perspectives, honour our commitments, and uphold the highest standards of professionalism, integrity, and dignity in every interaction.",
+              },
+              {
+                icon: "fa-clipboard-check",
+                title: "Accountability",
+                text: "We take ownership of our commitments, actions, and outcomes. We honour our promises, follow through on opportunities, and build trust through consistent action.",
+              },
+              {
+                icon: "fa-puzzle-piece",
+                title: "Collaboration",
+                text: "We work together, share our strengths, and foster a positive attitude that benefits everyone. Together, we achieve more, grow stronger, and create lasting success through collaboration and positivity.",
+              },
+              {
+                icon: "fa-book-open-reader",
+                title: "Learn to Enrich",
+                text: "We embrace lifelong learning, continuously developing our knowledge and skills to create greater value for ourselves and others. Invest in yourself, grow your value, and become the leader you aspire to be.",
+              },
+              {
+                icon: "fa-hands-clapping",
+                title: "Appreciation",
+                text: "We recognise and value the contributions of others, knowing that genuine appreciation builds stronger teams, inspires success, and creates meaningful growth.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="col-lg-4 col-md-6">
+                <div className="grip-core-values__card">
+                  <div className="grip-core-values__icon">
+                    <i className={`fa-solid ${item.icon}`} />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Why Choose Us */}
       <section className="si__why__choose__area pt-60 pb-120">
@@ -83,142 +219,6 @@ export default async function Home() {
                   <Link className="si__btn mt-15" href="/about">
                     Read more
                   </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Three Area - Uniqueness of GRIP */}
-      <section className="si__service__three__area pb-120">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="si__three__section__title mb-52 text-center">
-                <br />
-                <h2 className="text-white text-anime-style-3 as-h1">
-                  Uniqueness of <span>GRIP</span>
-                </h2>
-                <p className="text-white">
-                  Discover how GRIP helps professionals thrive through smart,
-                  structured networking solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            {/* 1: Digital Platform */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/smart-home.png" alt="Mobile app icon – GRIP digital-first networking app for Android and iOS" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Digital First</h5>
-                    <p>
-                      Android &amp; iOS Apps are User Friendly to track Geographical
-                      Attendance &amp; weekly activities, helping them maximize their
-                      potential
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 2: Regular Offline Training */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/meeting.png" alt="Group discussion icon – regular offline training for GRIP associates" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Regular Offline Training</h5>
-                    <p>
-                      Offline Trainings will be conducted twice in a month to help
-                      associates educate &amp; gain the networking knowledge. Trainings
-                      will be increased as per requirement
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 3: Freedom from Manual Work */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/presentation.png" alt="Presentation icon – paperless attendance and freedom from manual work" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Freedom from Manual Work</h5>
-                    <p>
-                      Record of attendance of visitors and their applications will be
-                      digitally done without any paper work. Associates attendance will
-                      be monitored through Geo locations which will be enabled through
-                      our mobile app functions
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 4: Chapter Mentor */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/value.png" alt="Diamond and team icon – dedicated mentor for every GRIP chapter" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Chapter Mentor</h5>
-                    <p>
-                      Each chapter will be supported by a Mentor who will travel along
-                      the chapter to help each associate to achieve their Goals in terms
-                      of business
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 5: Valued Associates */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/seminar.png" alt="Seminar icon – valued GRIP associates and leadership team" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Valued Associates</h5>
-                    <p>
-                      All Associates including the leadership team are free to do their
-                      business as all other activities of the forum will be maintained
-                      digitally through our app.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 6: Your Dedicated Business Page */}
-            <div className="col-lg-4 col-md-6">
-              <div className="si__service__three__box text-center">
-                <div className="si__service__three__inner" style={{ height: "376px" }}>
-                  <div className="si__service__three__icon">
-                    <img src="/assets/images/grip/meeting.png" alt="Business page icon – dedicated digital business page for GRIP associates" />
-                  </div>
-                  <div className="si__service__three__text">
-                    <h5>Your Dedicated Business Page</h5>
-                    <p>
-                      Dedicated digital business page in our official forum website
-                      which will fetch our associates an additional mileage of global
-                      visibility.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -296,28 +296,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Text Marquee */}
-      <section className="marquee-section mb-120">
-        <div className="marquee">
-          {[0, 1].map((group) => (
-            <div className="marquee-group" key={group}>
-              <div className="text">
-                ✅ India&apos;s 1st Digital Business Networking Platform
-              </div>
-              <div className="text weight">✅ Business Mentor Guidance</div>
-              <div className="text">✅ FREE Business Webpage</div>
-              <div className="text weight">✅ One-Touch GRIP App</div>
-              <div className="text">✅ Geo-Location Attendance</div>
-              <div className="text weight">
-                ✅ Zero Paperwork &amp; 100% Digital Platform
-              </div>
-              <div className="text">✅ Real Business Referrals</div>
-              <div className="text weight">✅ Knowledge Sharing Sessions</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Join the Revolution */}
       <section
         className="si__our__features__area pt-120 pb-120 custom__width bg"
@@ -373,116 +351,6 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Values */}
-      <section className="grip-core-values pt-100 pb-90">
-        <div className="container">
-          <div className="row mb-50">
-            <div className="col-lg-12 text-center">
-              <h2 className="grip-core-values__title">CORE VALUES</h2>
-            </div>
-          </div>
-          <div className="row g-4 g-lg-5">
-            {[
-              {
-                icon: "fa-people-group",
-                title: "Contributors Win™",
-                text: "Success comes from the value you create for others. When you share knowledge, create opportunities, and support fellow entrepreneurs, everyone grows; and Contributors Win™.",
-              },
-              {
-                icon: "fa-handshake",
-                title: "Respect",
-                text: "We respect every Associate, every profession, every idea, and every contribution. We listen with intent, value diverse perspectives, honour our commitments, and uphold the highest standards of professionalism, integrity, and dignity in every interaction.",
-              },
-              {
-                icon: "fa-clipboard-check",
-                title: "Accountability",
-                text: "We take ownership of our commitments, actions, and outcomes. We honour our promises, follow through on opportunities, and build trust through consistent action.",
-              },
-              {
-                icon: "fa-puzzle-piece",
-                title: "Collaboration",
-                text: "We work together, share our strengths, and foster a positive attitude that benefits everyone. Together, we achieve more, grow stronger, and create lasting success through collaboration and positivity.",
-              },
-              {
-                icon: "fa-book-open-reader",
-                title: "Learn to Enrich",
-                text: "We embrace lifelong learning, continuously developing our knowledge and skills to create greater value for ourselves and others. Invest in yourself, grow your value, and become the leader you aspire to be.",
-              },
-              {
-                icon: "fa-hands-clapping",
-                title: "Appreciation",
-                text: "We recognise and value the contributions of others, knowing that genuine appreciation builds stronger teams, inspires success, and creates meaningful growth.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="col-lg-4 col-md-6">
-                <div className="grip-core-values__card">
-                  <div className="grip-core-values__icon">
-                    <i className={`fa-solid ${item.icon}`} />
-                  </div>
-                  <h4>{item.title}</h4>
-                  <p>{item.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Uniqueness of GRIP */}
-      <section className="grip-uniqueness pt-40 pb-120">
-        <div className="container">
-          <div className="row mb-50">
-            <div className="col-lg-12 text-center">
-              <h2 className="grip-uniqueness__title">Uniqueness of GRIP</h2>
-            </div>
-          </div>
-          <div className="row g-4 g-lg-5">
-            {[
-              {
-                img: "/assets/images/grip/3.webp",
-                title: "One Touch GRIP App",
-                text: "Android & iOS Apps are User Friendly to track Geographical Attendance; 1-2-1 & all the activities, AI helping Chat box them maximize their potential and Real Recognition Awards.",
-              },
-              {
-                img: "/assets/images/grip/chapter2.jpg",
-                title: "Chapter Mentor",
-                text: "Each chapter will be supported by a Mentor who will travel along the chapter to help each member to achieve their goals in terms of business.",
-              },
-              {
-                img: "/assets/images/grip/aram.jpg",
-                title: "Dedicated Business Webpage",
-                text: "Dedicated digital business page in our official forum website which will fetch our members an additional mileage of global visibility. If a member requests his / her own web page to be added, it can be done.",
-              },
-              {
-                img: "/assets/images/grip/launch2.jpg",
-                title: "Regular Offline Training",
-                text: "Offline Trainings will be conducted twice in a month to help members educate & gain the networking knowledge. Trainings will be increased as per requirement.",
-              },
-              {
-                img: "/assets/images/grip/grip.jpeg",
-                title: "Respect Associates & Digital-First",
-                text: "All associates, including the leadership team, can focus on their businesses. Visitors Entry, Attendance, meeting records and performance tracking are digitally maintained, ensuring a seamless, transparent and completely paperless networking experience.",
-              },
-              {
-                img: "/assets/images/grip/launch.jpg",
-                title: "Knowledge Sharing Sessions",
-                text: "Structured knowledge sharing sessions help associates learn from peers, expand industry insight, and convert networking into real business growth.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="col-lg-4 col-md-6">
-                <div className="grip-uniqueness__card">
-                  <div className="grip-uniqueness__thumb">
-                    <img src={item.img} alt={item.title} />
-                  </div>
-                  <h4>{item.title}</h4>
-                  <p>{item.text}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

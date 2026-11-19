@@ -74,6 +74,26 @@ body {
   margin: 0 auto !important;
 }
 
+/* ── Home hero banner: never crop/stretch on large screens ────────────── */
+.si__slider__area--img {
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  background: #fff !important;
+  background-image: none !important;
+  display: block !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.si__slider__banner-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+
 /* ── Logo constraints across desktop & mobile ─────────────────────────── */
 .si__header__logo img {
   height: 60px !important;
