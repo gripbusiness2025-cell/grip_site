@@ -74,15 +74,16 @@ body {
   margin: 0 auto !important;
 }
 
-/* ── Home hero banner: never crop/stretch on large screens ────────────── */
+/* ── Home hero banner: full artwork fits viewport without overlap or cutoff ── */
 .si__slider__area--img {
   aspect-ratio: auto !important;
   min-height: 0 !important;
   height: auto !important;
-  background: #fff !important;
+  background: #fdfeff !important;
   background-image: none !important;
   display: block !important;
   padding: 0 !important;
+  margin-top: 0 !important;
   overflow: hidden;
 }
 .si__slider__banner-img {
@@ -90,8 +91,30 @@ body {
   width: 100%;
   max-width: 100%;
   height: auto;
+  margin: 0 auto;
   object-fit: contain;
   object-position: center top;
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .si__slider__banner-img {
+    width: min(100%, calc((100vh - 60px) * 16 / 9));
+    width: min(100%, calc((100dvh - 60px) * 16 / 9));
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .si__slider__banner-img {
+    width: min(calc(100% - 96px), calc((100vh - 60px) * 16 / 9));
+    width: min(calc(100% - 96px), calc((100dvh - 60px) * 16 / 9));
+  }
+}
+@media (min-width: 1200.02px) {
+  .si__slider__area--img {
+    margin-top: 92px !important;
+  }
+  .si__slider__banner-img {
+    width: min(calc(100% - 110px), calc((100vh - 92px) * 16 / 9));
+    width: min(calc(100% - 110px), calc((100dvh - 92px) * 16 / 9));
+  }
 }
 
 /* ── Logo constraints across desktop & mobile ─────────────────────────── */
@@ -146,7 +169,7 @@ body {
   will-change: transform, opacity;
 }
 
-/* Inner page header global override */
+/* Desktop header global override */
 .si__header__area.inner-page-header,
 #header-sticky.inner-page-header {
   background-color: #fff !important;
@@ -156,6 +179,23 @@ body {
   padding-bottom: 15px !important;
   border-bottom: 1px solid #eaeaea !important;
   z-index: 999 !important;
+}
+.si__header__area.inner-page-header .row,
+#header-sticky.inner-page-header .row {
+  align-items: center;
+}
+.si__header__area.inner-page-header .si__header__logo,
+#header-sticky.inner-page-header .si__header__logo {
+  margin-top: 0 !important;
+}
+.si__header__area.inner-page-header .si__header__logo img,
+#header-sticky.inner-page-header .si__header__logo img {
+  display: block;
+}
+.si__header__area.inner-page-header .si__header__menubar,
+#header-sticky.inner-page-header .si__header__menubar {
+  display: flex;
+  align-items: center;
 }
 .si__header__area.inner-page-header .si__header__menu,
 #header-sticky.inner-page-header .si__header__menu {
@@ -366,6 +406,26 @@ body {
   }
 }
 
+/* ── Floating Action Buttons Positioning ─────────────────────────────── */
+.float {
+  width: 52px !important;
+  height: 52px !important;
+  bottom: 24px !important;
+  right: 14px !important;
+}
+.float-1 {
+  width: 52px !important;
+  height: 52px !important;
+  bottom: 84px !important;
+  right: 14px !important;
+}
+.float-2 {
+  width: 52px !important;
+  height: 52px !important;
+  bottom: 144px !important;
+  right: 14px !important;
+}
+
 @media (max-width: 576px) {
   .si__slider__content h1, .si__slider__content h2.as-h1 {
     font-size: 20px !important;
@@ -409,6 +469,42 @@ body {
     height: 48px !important;
     bottom: 136px !important;
     right: 15px !important;
+  }
+}
+
+/* ── Marquee Section Mobile Responsive Bounds ───────────────────────── */
+@media (max-width: 991.98px) {
+  .marquee-section {
+    padding: 12px 0 !important;
+  }
+  .marquee .text {
+    font-size: 22px !important;
+    margin-left: 28px !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .marquee-section {
+    padding: 10px 0 !important;
+  }
+  .marquee .text {
+    font-size: 16px !important;
+    margin-left: 20px !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .marquee-section {
+    padding: 8px 0 !important;
+  }
+  .marquee .text {
+    font-size: 14px !important;
+    margin-left: 16px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
   }
 }
 

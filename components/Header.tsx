@@ -32,7 +32,7 @@ export default function Header({ menuType = "standard", zoneSlug }: HeaderProps)
 
   return (
     <>
-      <section id="header-sticky" className={`si__header__area ${pathname !== "/" ? "inner-page-header" : ""}`}>
+      <section id="header-sticky" className="si__header__area inner-page-header">
         <div className="container custom__container">
           <div className="row">
             <div className="col-lg-2">

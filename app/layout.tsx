@@ -47,7 +47,7 @@ export default function RootLayout({
         <link href="/assets/css/font-awesome-pro.css" rel="stylesheet" />
         <link href="/assets/css/animate.min.css" rel="stylesheet" />
         <link href="/assets/css/venobox.min.css" rel="stylesheet" />
-        <link href="/assets/css/style.css?v=1.0.2" rel="stylesheet" />
+        <link href="/assets/css/style.css?v=1.0.3" rel="stylesheet" />
         <link href="/assets/css/swiper-bundle.min.css" rel="stylesheet" />
         <link href="/assets/css/meanmenu.min.css" rel="stylesheet" />
         <link
