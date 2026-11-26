@@ -87,7 +87,7 @@ export default function RootLayout({
         <Script src="/assets/js/smooth-scroll.js" strategy="afterInteractive" />
         <Script src="/assets/js/venobox.min.js" strategy="afterInteractive" />
         <Script src="/assets/js/wow.min.js" strategy="afterInteractive" />
-        <Script src="/assets/js/theme.js" strategy="afterInteractive" />
+        <Script src="/assets/js/theme.js?v=hydrate" strategy="afterInteractive" />
       </body>
     </html>
   );

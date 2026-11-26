@@ -107,16 +107,16 @@ export default function About() {
               <div className="si__work__process__box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon1.svg" alt="Idea and cloud icon – digital support and weekly networking meetings" />
+                    <img src="/assets/images/work-process/icon1.svg" alt="One Touch GRIP App" />
                   </div>
                 </div>
               </div>
               <div className="si__work__process__content text-center">
-                <h5>Digital Support &amp; Weekly Meetings</h5>
+                <h5>One Touch GRIP App</h5>
                 <p>
-                  Connect seamlessly with influential industry leaders during our
-                  structured weekly meetings—completely digital, hassle-free, and
-                  efficient.
+                  Android &amp; iOS Apps are User Friendly to track Geographical
+                  Attendance; 1-2-1 &amp; all the activities, AI helping Chat box them
+                  maximize their potential and Real Recognition Awards.
                 </p>
               </div>
             </div>
@@ -124,15 +124,16 @@ export default function About() {
               <div className="si__work__process__box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon2.svg" alt="Analytics icon – thought leadership insights from industry experts" />
+                    <img src="/assets/images/work-process/icon2.svg" alt="Chapter Mentor" />
                   </div>
                 </div>
               </div>
               <div className="si__work__process__content text-center">
-                <h5>Thought Leadership</h5>
+                <h5>Chapter Mentor</h5>
                 <p>
-                  Stay ahead of the curve with valuable insights and strategies from
-                  top industry experts, embracing innovation and emerging trends.
+                  Each chapter will be supported by a Mentor who will travel along the
+                  chapter to help each member to achieve their goals in terms of
+                  business.
                 </p>
               </div>
             </div>
@@ -140,15 +141,16 @@ export default function About() {
               <div className="si__work__process__box last-box">
                 <div className="si__work__process__icon">
                   <div className="si__work__process__icon__inner text-center">
-                    <img src="/assets/images/work-process/icon3.svg" alt="Target and checklist icon – cross-industry business collaboration" />
+                    <img src="/assets/images/work-process/icon3.svg" alt="Dedicated Business Webpage" />
                   </div>
                 </div>
               </div>
               <div className="si__work__process__content text-center">
-                <h5>Cross-Industry Collaboration</h5>
+                <h5>Dedicated Business Webpage</h5>
                 <p>
-                  Expand your network across diverse sectors and foster meaningful
-                  connections that inspire cross-disciplinary growth and innovation.
+                  Dedicated digital business page in our official forum website which
+                  will fetch our members an additional mileage of global visibility. If
+                  a member requests his / her own web page to be added, it can be done.
                 </p>
               </div>
             </div>

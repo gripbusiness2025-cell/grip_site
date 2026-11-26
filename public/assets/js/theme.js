@@ -2,6 +2,14 @@
 	"use-strict";
 	var windowOn = $(window);
 
+	// Run DOM-mutating animations after Next.js hydration so the server HTML
+	// still matches the client render (SplitText / GSAP inline styles).
+	function afterHydration(fn) {
+		var run = function () { setTimeout(fn, 0); };
+		if (document.readyState === "complete") run();
+		else window.addEventListener("load", run);
+	}
+
 	$(document).ready(function () {
 
 	// Image reveal animation
@@ -36,25 +44,29 @@
 	}
 
 	// Call the function with your selectors
-	revealAnimation(".reveal-left", "x", 100, 1.15);
-	revealAnimation(".reveal-bottom", "y", 100, 1.15);
+	afterHydration(function () {
+		revealAnimation(".reveal-left", "x", 100, 1.15);
+		revealAnimation(".reveal-bottom", "y", 100, 1.15);
+	});
 
 });
 
 // Counterup
 $('.counter').counterUp({});
 
-// Wow Js
-if ($('.wow').length) {
+// Wow Js — start after hydration so visibility/animation inline styles
+// are not written onto the server HTML before React hydrates.
+afterHydration(function () {
+	if (!$('.wow').length || typeof WOW === "undefined") return;
 	var wow = new WOW({
-		boxClass: 'wow', // animated element css class (default is wow)
-		animateClass: 'animated', // animation css class (default is animated)
-		offset: 0, // distance to the element when triggering the animation (default is 0)
-		mobile: false, // trigger animations on mobile devices (default is true)
-		live: true // act on asynchronously loaded content (default is true)
+		boxClass: 'wow',
+		animateClass: 'animated',
+		offset: 0,
+		mobile: false,
+		live: false
 	});
 	wow.init();
-}
+});
 
 // Header Search
 if($('.search-box-outer').length) {
@@ -67,6 +79,7 @@ if($('.search-box-outer').length) {
 
 
 /* Text Effect Animation */
+afterHydration(function () {
 if ($('.text-anime-style-3').length) {		
 	let	animatedTextElements = document.querySelectorAll('.text-anime-style-3');
 	
@@ -100,6 +113,7 @@ if ($('.text-anime-style-3').length) {
 		});
 	});		
 }
+});
 
 
 // Progress-Area

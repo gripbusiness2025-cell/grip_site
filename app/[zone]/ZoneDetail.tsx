@@ -151,16 +151,9 @@ export default function ZoneDetail({ zoneSlug, initialChapters }: { zoneSlug: st
           </div>
 
           {loading ? (
-            <div className="row">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="col-lg-4 col-md-6 mb-4">
-                  <div className="zone-chapter-card shimmer-card">
-                    <div className="shimmer-line header-shimmer" />
-                    <div className="shimmer-line body-shimmer" />
-                    <div className="shimmer-line footer-shimmer" />
-                  </div>
-                </div>
-              ))}
+            <div className="zone-page-loader zone-page-loader--inline" role="status" aria-live="polite">
+              <div className="zone-page-loader__spinner" />
+              <p>Loading chapters…</p>
             </div>
           ) : chapters.length === 0 ? (
             <div className="zone-empty-state">
@@ -359,35 +352,30 @@ export default function ZoneDetail({ zoneSlug, initialChapters }: { zoneSlug: st
           margin: 0;
         }
 
-        /* Shimmer Loading animation */
-        @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        .shimmer-card {
-          padding: 24px;
+        .zone-page-loader--inline {
+          min-height: 280px;
           display: flex;
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
           gap: 16px;
         }
-        .shimmer-line {
-          background: linear-gradient(90deg, #ececec 25%, #f5f5f5 50%, #ececec 75%);
-          background-size: 200% 100%;
-          animation: shimmer 1.5s infinite;
-          border-radius: 4px;
+        .zone-page-loader--inline p {
+          margin: 0;
+          color: #666;
+          font-weight: 600;
+          font-size: 15px;
         }
-        .header-shimmer {
-          height: 24px;
-          width: 60%;
+        .zone-page-loader__spinner {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: 4px solid #f0d4d5;
+          border-top-color: #c1272d;
+          animation: zone-spin 0.7s linear infinite;
         }
-        .body-shimmer {
-          height: 80px;
-          width: 100%;
-        }
-        .footer-shimmer {
-          height: 38px;
-          width: 100%;
-          border-radius: 8px;
+        @keyframes zone-spin {
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </>
